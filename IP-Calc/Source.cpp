@@ -11,12 +11,15 @@ void arrAlloc(int** &pArr, int row, int col),
 	 arrRelease(int** &pArr, int row);
 
 void arrInit(int** &pArr, int row, int col),
-	 arrPrint(int** &pArr, int row, int col);
+	 arrPrint(int** &pArr, int row, int col, int &bit),
+	 arrPrintDescription(int n);
 
-void arrPrintDescription(int n);
+void getIPandMask(int** &pArr, int row, int col, int &bit);
 
-int GetInt();
-void CinWait();
+void calcMask(int** &pArr, int row, int col, int &bit);
+
+int getInt();
+void cinWait();
 
 // Entry point
 int main(){
@@ -26,11 +29,14 @@ int main(){
 
 	arrAlloc(resultArr, row, col);
 	arrInit(resultArr, row, col);
-	arrPrint(resultArr, row, col);
-
+	arrPrint(resultArr, row, col, bit);
+	
+	getIPandMask(resultArr, row, col, bit);
+	calcMask(resultArr, row, col, bit);
+	arrPrint(resultArr, row, col, bit);
 	
 	arrRelease(resultArr, row);
-	CinWait();
+	cinWait();
 	return 0;
 }
 
@@ -49,7 +55,6 @@ void arrRelease(int** &pArr, int row){
 
 	delete[] pArr;
 }
-
 // Init Array (null)
 void arrInit(int** &pArr, int row, int col){
 
@@ -57,8 +62,12 @@ void arrInit(int** &pArr, int row, int col){
 		for (int j(0); j < col; j++)
 			pArr[i][j] = 0;
 }
+
+
+
 // Print Array
-void arrPrint(int** &pArr, int row, int col){
+void arrPrint(int** &pArr, int row, int col, int &bit){
+	system("cls");
 	cout << "\n   IPv4 Calculator by Art.Stea1th (Stanislav Kuzmitch)\n\n";
 
 	for (int i(0); i < 80; i++) cout << '-';
@@ -70,13 +79,16 @@ void arrPrint(int** &pArr, int row, int col){
 			cout << setw(3) << pArr[i][j];
 			if (j != col - 1) cout << '.';
 		}
-		if (i == 1) cout << " | " << 32 << " bit\n";
+		if (i == 1) cout << " | " << bit << " bit\n";
 		else if (i == 2) cout << "\n\n";
 		else cout << '\n';
 	}
-	cout << '\n' << setw(16) << "Hosts: " << setw(15) << 256;
-}
+	cout << '\n' << setw(16) << "Hosts: " << setw(15) << 256 << "\n\n";
+	
+	for (int i(0); i < 80; i++) cout << '-';
 
+	cout << "\n";
+}
 // Print Description Array Strings
 void arrPrintDescription(int n){
 	switch (n){
@@ -91,8 +103,64 @@ void arrPrintDescription(int n){
 	}
 }
 
+// Func for get IP adress
+void getIPandMask(int** &pArr, int row, int col, int &bit){
+	int n(0);
+	
+	for (int i(0); i < col; i++){
+		do {
+			system("cls");
+			arrPrint(pArr, row, col, bit);
+			cout << "\tEnter the [" << i + 1 << "] octet (0 - 255): ";
+			n = getInt();
+			if (n >= 0 && n <= 255){
+				pArr[0][i] = n;
+				n = 0;
+				break;
+			}
+		} while (true);		
+	}
+	do {
+		system("cls");
+		arrPrint(pArr, row, col, bit);
+		cout << "\tEnter bitmask (0 - 32): ";
+		n = getInt();
+		if (n >= 0 && n <= 32){
+			bit = n;
+			n = 0;
+			break;
+		}
+	} while (true);
+
+	//system("cls");
+	//arrPrint(pArr, row, col, bit);
+}
+// Calculate Netmask
+void calcMask(int** &pArr, int row, int col, int &bit){
+	int n(bit / 8), i(0);
+
+	while (i < n){
+		pArr[1][i] = 255;
+		i++;
+	}
+
+	if (i < col)
+	switch (bit % 8){
+	case 0: pArr[1][i] = 0; break;
+	case 1: pArr[1][i] = 128; break;
+	case 2: pArr[1][i] = 192; break;
+	case 3: pArr[1][i] = 224; break;
+	case 4: pArr[1][i] = 240; break;
+	case 5: pArr[1][i] = 248; break;
+	case 6: pArr[1][i] = 252; break;
+	case 7: pArr[1][i] = 254; break;
+	default: break;
+	}
+}
+
+
 // Input
-int GetInt(){
+int getInt(){
 	int k, n = 0, c = 0, q = 0;
 	cin.clear(); cin.sync();
 
@@ -121,7 +189,7 @@ int GetInt(){
 	return n;
 }
 // Pause
-void CinWait(){
+void cinWait(){
 	cin.clear();
 	cin.sync();
 	cin.get();
