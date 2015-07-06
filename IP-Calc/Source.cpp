@@ -16,7 +16,7 @@ void arrInit(int** &pArr, int row, int col),
 
 void getIPandMask(int** &pArr, int row, int col, int &bit);
 
-void calcMask(int** &pArr, int row, int col, int &bit);
+void calcAll(int** &pArr, int row, int col, int &bit);
 
 int getInt();
 void cinWait();
@@ -32,7 +32,7 @@ int main(){
 	arrPrint(resultArr, row, col, bit);
 	
 	getIPandMask(resultArr, row, col, bit);
-	calcMask(resultArr, row, col, bit);
+	calcAll(resultArr, row, col, bit);
 	arrPrint(resultArr, row, col, bit);
 	
 	arrRelease(resultArr, row);
@@ -83,7 +83,7 @@ void arrPrint(int** &pArr, int row, int col, int &bit){
 		else if (i == 2) cout << "\n\n";
 		else cout << '\n';
 	}
-	cout << '\n' << setw(16) << "Hosts: " << setw(15) << 256 << "\n\n";
+	cout << '\n' << setw(16) << "Hosts: " << setw(15) << 0 << "\n\n";
 	
 	for (int i(0); i < 80; i++) cout << '-';
 
@@ -103,13 +103,14 @@ void arrPrintDescription(int n){
 	}
 }
 
+
+
 // Func for get IP adress
 void getIPandMask(int** &pArr, int row, int col, int &bit){
 	int n(0);
 	
 	for (int i(0); i < col; i++){
 		do {
-			system("cls");
 			arrPrint(pArr, row, col, bit);
 			cout << "\tEnter the [" << i + 1 << "] octet (0 - 255): ";
 			n = getInt();
@@ -121,7 +122,6 @@ void getIPandMask(int** &pArr, int row, int col, int &bit){
 		} while (true);		
 	}
 	do {
-		system("cls");
 		arrPrint(pArr, row, col, bit);
 		cout << "\tEnter bitmask (0 - 32): ";
 		n = getInt();
@@ -131,14 +131,13 @@ void getIPandMask(int** &pArr, int row, int col, int &bit){
 			break;
 		}
 	} while (true);
-
-	//system("cls");
-	//arrPrint(pArr, row, col, bit);
 }
-// Calculate Netmask
-void calcMask(int** &pArr, int row, int col, int &bit){
+
+// Calculate All
+void calcAll(int** &pArr, int row, int col, int &bit){
 	int n(bit / 8), i(0);
 
+	// Netmask
 	while (i < n){
 		pArr[1][i] = 255;
 		i++;
@@ -156,6 +155,37 @@ void calcMask(int** &pArr, int row, int col, int &bit){
 	case 7: pArr[1][i] = 254; break;
 	default: break;
 	}
+
+	// Wildcard
+	for (int i(0); i < col; i++){
+		pArr[2][i] = 255 - pArr[1][i];
+	}
+
+	// Network
+	for (int i(0); i < col; i++){
+		pArr[3][i] = pArr[0][i];
+	}
+	/*for (int i(col - 1); i >= 0; i--){
+		if (pArr[3][i] != 0){
+			pArr[3][i] = pArr[3][i] - 1;
+			break;
+		}
+		else if (i != 0){
+			if (pArr[3][i - 1] != 0){
+				pArr[3][i - 1] -= 1;
+			}
+		}
+	}*/
+	
+	// Host Min
+	for (int i(0); i < col; i++){
+		pArr[3][i] = pArr[0][i];
+		if (i == col - 1) pArr[3][i]++;
+	}
+
+	// Host Max
+
+	// Hosts
 }
 
 
