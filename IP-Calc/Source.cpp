@@ -16,7 +16,7 @@ void arrInit(int** &pArr, int row, int col),
 
 void getIPandMask(int** &pArr, int row, int col, int &bit);
 
-void calcAll(int** &pArr, int row, int col, int &bit);
+void calcMaskWild(int** &pArr, int row, int col, int &bit);
 
 int getInt();
 void cinWait();
@@ -32,38 +32,13 @@ int main(){
 	arrPrint(resultArr, row, col, bit);
 	
 	getIPandMask(resultArr, row, col, bit);
-	calcAll(resultArr, row, col, bit);
+	calcMaskWild(resultArr, row, col, bit);
 	arrPrint(resultArr, row, col, bit);
 	
 	arrRelease(resultArr, row);
 	cinWait();
 	return 0;
 }
-
-// Allocates memory for an array
-void arrAlloc(int** &pArr, int row, int col){
-	pArr = new int*[row];
-
-	for (int i(0); i < row; i++)
-		pArr[i] = new int[col];
-}
-// Release memory for an array
-void arrRelease(int** &pArr, int row){
-	
-	for (int i(0); i < row; i++)
-		delete[] pArr[i];
-
-	delete[] pArr;
-}
-// Init Array (null)
-void arrInit(int** &pArr, int row, int col){
-
-	for (int i(0); i < row; i++)
-		for (int j(0); j < col; j++)
-			pArr[i][j] = 0;
-}
-
-
 
 // Print Array
 void arrPrint(int** &pArr, int row, int col, int &bit){
@@ -133,8 +108,8 @@ void getIPandMask(int** &pArr, int row, int col, int &bit){
 	} while (true);
 }
 
-// Calculate All
-void calcAll(int** &pArr, int row, int col, int &bit){
+// Calculate Mask & Wildcard
+void calcMaskWild(int** &pArr, int row, int col, int &bit){
 	int n(bit / 8), i(0);
 
 	// Netmask
@@ -160,34 +135,12 @@ void calcAll(int** &pArr, int row, int col, int &bit){
 	for (int i(0); i < col; i++){
 		pArr[2][i] = 255 - pArr[1][i];
 	}
-
-	// Network
-	for (int i(0); i < col; i++){
-		pArr[3][i] = pArr[0][i];
-	}
-	/*for (int i(col - 1); i >= 0; i--){
-		if (pArr[3][i] != 0){
-			pArr[3][i] = pArr[3][i] - 1;
-			break;
-		}
-		else if (i != 0){
-			if (pArr[3][i - 1] != 0){
-				pArr[3][i - 1] -= 1;
-			}
-		}
-	}*/
-	
-	// Host Min
-	for (int i(0); i < col; i++){
-		pArr[3][i] = pArr[0][i];
-		if (i == col - 1) pArr[3][i]++;
-	}
-
-	// Host Max
-
-	// Hosts
 }
 
+// Network
+// Host Min
+// Host Max
+// Hosts
 
 // Input
 int getInt(){
@@ -223,4 +176,29 @@ void cinWait(){
 	cin.clear();
 	cin.sync();
 	cin.get();
+}
+
+
+
+// Allocates memory for an array
+void arrAlloc(int** &pArr, int row, int col){
+	pArr = new int*[row];
+
+	for (int i(0); i < row; i++)
+		pArr[i] = new int[col];
+}
+// Release memory for an array
+void arrRelease(int** &pArr, int row){
+
+	for (int i(0); i < row; i++)
+		delete[] pArr[i];
+
+	delete[] pArr;
+}
+// Init Array (null)
+void arrInit(int** &pArr, int row, int col){
+
+	for (int i(0); i < row; i++)
+		for (int j(0); j < col; j++)
+			pArr[i][j] = 0;
 }
