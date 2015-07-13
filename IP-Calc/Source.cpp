@@ -8,11 +8,11 @@
 using namespace std;
 
 void arrAlloc(int** &pArr, int row, int col),
-	 arrRelease(int** &pArr, int row);
+arrRelease(int** &pArr, int row);
 
 void arrInit(int** &pArr, int row, int col),
-	 arrPrint(int** &pArr, int row, int col, int &bit),
-	 arrPrintDescription(int n);
+arrPrint(int** &pArr, int row, int col, int &bit),
+arrPrintDescription(int n);
 
 void getIPandMask(int** &pArr, int row, int col, int &bit);
 
@@ -30,11 +30,11 @@ int main(){
 	arrAlloc(resultArr, row, col);
 	arrInit(resultArr, row, col);
 	arrPrint(resultArr, row, col, bit);
-	
+
 	getIPandMask(resultArr, row, col, bit);
 	calcMaskWild(resultArr, row, col, bit);
 	arrPrint(resultArr, row, col, bit);
-	
+
 	arrRelease(resultArr, row);
 	cinWait();
 	return 0;
@@ -46,7 +46,7 @@ void arrPrint(int** &pArr, int row, int col, int &bit){
 	cout << "\n   IPv4 Calculator by Art.Stea1th (Stanislav Kuzmitch)\n\n";
 
 	for (int i(0); i < 80; i++) cout << '-';
-	
+
 	cout << "\n";
 	for (int i(0); i < row; i++){
 		arrPrintDescription(i);
@@ -59,7 +59,7 @@ void arrPrint(int** &pArr, int row, int col, int &bit){
 		else cout << '\n';
 	}
 	cout << '\n' << setw(16) << "Hosts: " << setw(15) << 0 << "\n\n";
-	
+
 	for (int i(0); i < 80; i++) cout << '-';
 
 	cout << "\n";
@@ -83,7 +83,7 @@ void arrPrintDescription(int n){
 // Func for get IP adress
 void getIPandMask(int** &pArr, int row, int col, int &bit){
 	int n(0);
-	
+
 	for (int i(0); i < col; i++){
 		do {
 			arrPrint(pArr, row, col, bit);
@@ -94,7 +94,7 @@ void getIPandMask(int** &pArr, int row, int col, int &bit){
 				n = 0;
 				break;
 			}
-		} while (true);		
+		} while (true);
 	}
 	do {
 		arrPrint(pArr, row, col, bit);
@@ -111,36 +111,70 @@ void getIPandMask(int** &pArr, int row, int col, int &bit){
 // Calculate Mask & Wildcard
 void calcMaskWild(int** &pArr, int row, int col, int &bit){
 	int n(bit / 8), i(0);
+	
+	// 0. IP
 
-	// Netmask
+	// 1. Netmask
 	while (i < n){
 		pArr[1][i] = 255;
 		i++;
 	}
 
 	if (i < col)
-	switch (bit % 8){
-	case 0: pArr[1][i] = 0; break;
-	case 1: pArr[1][i] = 128; break;
-	case 2: pArr[1][i] = 192; break;
-	case 3: pArr[1][i] = 224; break;
-	case 4: pArr[1][i] = 240; break;
-	case 5: pArr[1][i] = 248; break;
-	case 6: pArr[1][i] = 252; break;
-	case 7: pArr[1][i] = 254; break;
-	default: break;
+		switch (bit % 8){
+		case 0: pArr[1][i] = 0; break;
+		case 1: pArr[1][i] = 128; break;
+		case 2: pArr[1][i] = 192; break;
+		case 3: pArr[1][i] = 224; break;
+		case 4: pArr[1][i] = 240; break;
+		case 5: pArr[1][i] = 248; break;
+		case 6: pArr[1][i] = 252; break;
+		case 7: pArr[1][i] = 254; break;
+		default: break;
 	}
 
-	// Wildcard
+	// 2. Wildcard
 	for (int i(0); i < col; i++){
 		pArr[2][i] = 255 - pArr[1][i];
 	}
-}
 
-// Network
-// Host Min
-// Host Max
-// Hosts
+	// 3. Network
+	// 4. Host Min
+	// 5. Host Max
+	// 6. Broadcast
+	// 7. Hosts
+
+	for (int i(0); i < col; i++){
+		if (pArr[2][i] == 0){
+			pArr[3][i] = pArr[0][i];
+			pArr[4][i] = pArr[0][i];
+			pArr[5][i] = 255; // !!!
+			pArr[6][i] = 255;
+		}
+		else if (pArr[2][i] == 255){
+			pArr[3][i] = 0;
+			pArr[4][3] = 1;
+			pArr[5][3] = 254;
+			pArr[6][i] = 255;
+		}
+		else{
+			if (i < col){
+				if ((pArr[0][i] + pArr[2][i]) < 256){
+					pArr[3][i] = pArr[0][i];
+					pArr[4][i] = pArr[0][i];
+					pArr[5][i] = pArr[0][i] + pArr[2][i];
+					pArr[6][i] = pArr[0][i] + pArr[2][i];
+				}
+				else{
+					pArr[3][i] = 255 - pArr[2][i];
+					pArr[4][i] = 255 - pArr[2][i];
+					pArr[5][i] = 255;
+					pArr[6][i] = 255;
+				}
+			}
+		}
+	}
+}
 
 // Input
 int getInt(){
