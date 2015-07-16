@@ -140,7 +140,7 @@ void calculateAll(int** &pArr, int row, int col, int &bit, ULL &hosts){
 			while (pArr[3][i] + pArr[2][i] > support_arr[0] - support_arr[size - 1]){
 				pArr[3][i]--;
 			}
-			if (pArr[3][i] > 0 && i != col - 1) pArr[3][i]--;
+			if (pArr[3][i] > 0) pArr[3][i]--;
 		}
 	}
 
