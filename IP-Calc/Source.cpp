@@ -8,15 +8,15 @@
 using namespace std;
 
 void arrAlloc(int** &pArr, int row, int col),
-arrRelease(int** &pArr, int row);
+	 arrRelease(int** &pArr, int row);
 
 void arrInit(int** &pArr, int row, int col),
-arrPrint(int** &pArr, int row, int col, int &bit),
-arrPrintDescription(int n);
+	 arrPrint(int** &pArr, int row, int col, int &bit, int &hosts),
+	 arrPrintDescription(int n);
 
-void getIPandMask(int** &pArr, int row, int col, int &bit);
+void getIPandMask(int** &pArr, int row, int col, int &bit, int &hosts);
 
-void calcMaskWild(int** &pArr, int row, int col, int &bit);
+void calcMaskWild(int** &pArr, int row, int col, int &bit, int &hosts);
 
 int getInt();
 void cinWait();
@@ -30,11 +30,11 @@ int main(){
 
 		arrAlloc(resultArr, row, col);
 		arrInit(resultArr, row, col);
-		arrPrint(resultArr, row, col, bit);
+		arrPrint(resultArr, row, col, bit, hosts);
 
-		getIPandMask(resultArr, row, col, bit);
-		calcMaskWild(resultArr, row, col, bit);
-		arrPrint(resultArr, row, col, bit);
+		getIPandMask(resultArr, row, col, bit, hosts);
+		calcMaskWild(resultArr, row, col, bit, hosts);
+		arrPrint(resultArr, row, col, bit, hosts);
 
 		arrRelease(resultArr, row);
 		cinWait();
@@ -83,12 +83,12 @@ void arrPrintDescription(int n){
 
 
 // Func for get IP adress
-void getIPandMask(int** &pArr, int row, int col, int &bit){
+void getIPandMask(int** &pArr, int row, int col, int &bit, int &hosts){
 	int n(0);
 
 	for (int i(0); i < col; i++){
 		do {
-			arrPrint(pArr, row, col, bit);
+			arrPrint(pArr, row, col, bit, hosts);
 			cout << "\tEnter the [" << i + 1 << "] octet (0 - 255): ";
 			n = getInt();
 			if (n >= 0 && n <= 255){
@@ -99,7 +99,7 @@ void getIPandMask(int** &pArr, int row, int col, int &bit){
 		} while (true);
 	}
 	do {
-		arrPrint(pArr, row, col, bit);
+		arrPrint(pArr, row, col, bit, hosts);
 		cout << "\tEnter bitmask (0 - 32): ";
 		n = getInt();
 		if (n >= 0 && n <= 32){
@@ -143,7 +143,7 @@ void calcMaskWild(int** &pArr, int row, int col, int &bit, int &hosts){
 		if (i < bit / 8) pArr[3][i] = pArr[0][i];
 		else if (i == bit / 8){
 			pArr[3][i] = pArr[0][i];
-			while (pArr[3][i] + pArr[2][i] > support_arr[0] - support_arr[size - 1]){
+			while (pArr[3][i] + pArr[2][i] >= support_arr[0] - support_arr[size - 1]){
 				pArr[3][i]--;
 			}
 		}
