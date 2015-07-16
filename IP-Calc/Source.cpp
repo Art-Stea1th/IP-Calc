@@ -111,69 +111,19 @@ void getIPandMask(int** &pArr, int row, int col, int &bit){
 // Calculate Mask & Wildcard
 void calcMaskWild(int** &pArr, int row, int col, int &bit){
 	int n(bit / 8), i(0);
-	
+
 	// 0. IP
+	pArr[0][0]; pArr[0][1]; pArr[0][2]; pArr[0][3];
 
 	// 1. Netmask
-	while (i < n){
-		pArr[1][i] = 255;
-		i++;
-	}
 
-	if (i < col)
-		switch (bit % 8){
-		case 0: pArr[1][i] = 0; break;
-		case 1: pArr[1][i] = 128; break;
-		case 2: pArr[1][i] = 192; break;
-		case 3: pArr[1][i] = 224; break;
-		case 4: pArr[1][i] = 240; break;
-		case 5: pArr[1][i] = 248; break;
-		case 6: pArr[1][i] = 252; break;
-		case 7: pArr[1][i] = 254; break;
-		default: break;
-	}
 
 	// 2. Wildcard
-	for (int i(0); i < col; i++){
-		pArr[2][i] = 255 - pArr[1][i];
-	}
-
 	// 3. Network
 	// 4. Host Min
 	// 5. Host Max
 	// 6. Broadcast
 	// 7. Hosts
-
-	for (int i(0); i < col; i++){
-		if (pArr[2][i] == 0){
-			pArr[3][i] = pArr[0][i];
-			pArr[4][i] = pArr[0][i];
-			pArr[5][i] = 255; // !!!
-			pArr[6][i] = 255;
-		}
-		else if (pArr[2][i] == 255){
-			pArr[3][i] = 0;
-			pArr[4][3] = 1;
-			pArr[5][3] = 254;
-			pArr[6][i] = 255;
-		}
-		else{
-			if (i < col){
-				if ((pArr[0][i] + pArr[2][i]) < 256){
-					pArr[3][i] = pArr[0][i];
-					pArr[4][i] = pArr[0][i];
-					pArr[5][i] = pArr[0][i] + pArr[2][i];
-					pArr[6][i] = pArr[0][i] + pArr[2][i];
-				}
-				else{
-					pArr[3][i] = 255 - pArr[2][i];
-					pArr[4][i] = 255 - pArr[2][i];
-					pArr[5][i] = 255;
-					pArr[6][i] = 255;
-				}
-			}
-		}
-	}
 }
 
 // Input
