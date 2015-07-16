@@ -25,23 +25,25 @@ void cinWait();
 int main(){
 	int **resultArr = nullptr,
 		col(4), row(7);
-	int bit(0);
+	while (true){
+		int bit(0), hosts(0);
 
-	arrAlloc(resultArr, row, col);
-	arrInit(resultArr, row, col);
-	arrPrint(resultArr, row, col, bit);
+		arrAlloc(resultArr, row, col);
+		arrInit(resultArr, row, col);
+		arrPrint(resultArr, row, col, bit);
 
-	getIPandMask(resultArr, row, col, bit);
-	calcMaskWild(resultArr, row, col, bit);
-	arrPrint(resultArr, row, col, bit);
+		getIPandMask(resultArr, row, col, bit);
+		calcMaskWild(resultArr, row, col, bit);
+		arrPrint(resultArr, row, col, bit);
 
-	arrRelease(resultArr, row);
-	cinWait();
+		arrRelease(resultArr, row);
+		cinWait();
+	}
 	return 0;
 }
 
 // Print Array
-void arrPrint(int** &pArr, int row, int col, int &bit){
+void arrPrint(int** &pArr, int row, int col, int &bit, int &hosts){
 	system("cls");
 	cout << "\n   IPv4 Calculator by Art.Stea1th (Stanislav Kuzmitch)\n\n";
 
@@ -58,7 +60,7 @@ void arrPrint(int** &pArr, int row, int col, int &bit){
 		else if (i == 2) cout << "\n\n";
 		else cout << '\n';
 	}
-	cout << '\n' << setw(16) << "Hosts: " << setw(15) << 0 << "\n\n";
+	cout << '\n' << setw(16) << "Hosts: " << setw(15) << hosts << "\n\n";
 
 	for (int i(0); i < 80; i++) cout << '-';
 
@@ -109,21 +111,74 @@ void getIPandMask(int** &pArr, int row, int col, int &bit){
 }
 
 // Calculate Mask & Wildcard
-void calcMaskWild(int** &pArr, int row, int col, int &bit){
-	int n(bit / 8), i(0);
+void calcMaskWild(int** &pArr, int row, int col, int &bit, int &hosts){
+	const int size(9);
+	int support_arr[size];
 
-	// 0. IP
-	pArr[0][0]; pArr[0][1]; pArr[0][2]; pArr[0][3];
+	// Fill support_arr | 256 | 128 | 64 | 32 | 16 | 8 | 4 | 2 | 1 |
+	for (int i(0); i < size; i++)
+		support_arr[i] = pow(2, (size - 1 - i));
 
-	// 1. Netmask
+	// * 0. IP
+	// pArr[0][0]; pArr[0][1]; pArr[0][2]; pArr[0][3];
 
+	// * 1. Netmask
+	// pArr[1][0]; pArr[1][1]; pArr[1][2]; pArr[1][3];
 
-	// 2. Wildcard
-	// 3. Network
-	// 4. Host Min
-	// 5. Host Max
-	// 6. Broadcast
+	for (int i(0); i <= bit / 8 && i < col; i++){
+		if (i != bit / 8) pArr[1][i] = support_arr[0] - support_arr[size - 1];
+		else pArr[1][i] = support_arr[0] - support_arr[bit % 8];
+	}	
+
+	// * 2. Wildcard
+	// pArr[2][0]; pArr[2][1]; pArr[2][2]; pArr[2][3];
+
+	for (int i(0); i < col; i++)
+		pArr[2][i] = support_arr[0] - support_arr[size - 1] - pArr[1][i];
+
+	// * 3. Network
+	// pArr[3][0]; pArr[3][1]; pArr[3][2]; pArr[3][3];
+
+	for (int i(0); i < col; i++){
+		if (i < bit / 8) pArr[3][i] = pArr[0][i];
+		else if (i == bit / 8){
+			pArr[3][i] = pArr[0][i];
+			while (pArr[3][i] + pArr[2][i] > support_arr[0] - support_arr[size - 1]){
+				pArr[3][i]--;
+			}
+		}
+	}
+
+	// * 4. Host Min
+	// pArr[4][0]; pArr[4][1]; pArr[4][2]; pArr[4][3];
+
+	for (int i(0); i < col; i++){
+		if (i != col - 1) pArr[4][i] = pArr[3][i];
+		else pArr[4][i] = pArr[3][i] + 1;
+	}
+	// * 5. Host Max
+	// pArr[5][0]; pArr[5][1]; pArr[5][2]; pArr[5][3];
+
+	for (int i(0); i < col; i++){
+		if (i < bit / 8) pArr[5][i] = pArr[0][i];
+		else {
+			if (i != col - 1) pArr[5][i] = pArr[3][i] + pArr[2][i];
+			else pArr[5][i] = pArr[3][i] + pArr[2][i] - 1;
+		}
+	}
+
+	// * 6. Broadcast
+	// pArr[6][0]; pArr[6][1]; pArr[6][2]; pArr[6][3];
+
+	for (int i(0); i < col; i++){
+		if (i < bit / 8) pArr[6][i] = pArr[0][i];
+		else pArr[6][i] = pArr[3][i] + pArr[2][i];
+	}
+
 	// 7. Hosts
+
+	
+
 }
 
 // Input
