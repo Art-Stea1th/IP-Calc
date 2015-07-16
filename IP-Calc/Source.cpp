@@ -1,5 +1,7 @@
 // Art.Stea1th (Stanislav Kuzmitch)
 // Calculator IPv4, Mask, first-last IP, Broadcast etc.
+#define ULL unsigned long long
+
 #include <cstdio>
 #include <conio.h>
 
@@ -11,12 +13,12 @@ void arrAlloc(int** &pArr, int row, int col),
 	 arrRelease(int** &pArr, int row);
 
 void arrInit(int** &pArr, int row, int col),
-	 arrPrint(int** &pArr, int row, int col, int &bit, int &hosts),
+	 arrPrint(int** &pArr, int row, int col, int &bit, ULL &hosts),
 	 arrPrintDescription(int n);
 
-void getIPandMask(int** &pArr, int row, int col, int &bit, int &hosts);
+void getIPandMask(int** &pArr, int row, int col, int &bit, ULL &hosts);
 
-void calcMaskWild(int** &pArr, int row, int col, int &bit, int &hosts);
+void calculateAll(int** &pArr, int row, int col, int &bit, ULL &hosts);
 
 int getInt();
 void cinWait();
@@ -26,14 +28,15 @@ int main(){
 	int **resultArr = nullptr,
 		col(4), row(7);
 	while (true){
-		int bit(0), hosts(0);
+		int bit(0);
+		ULL hosts(0);
 
 		arrAlloc(resultArr, row, col);
 		arrInit(resultArr, row, col);
 		arrPrint(resultArr, row, col, bit, hosts);
 
 		getIPandMask(resultArr, row, col, bit, hosts);
-		calcMaskWild(resultArr, row, col, bit, hosts);
+		calculateAll(resultArr, row, col, bit, hosts);
 		arrPrint(resultArr, row, col, bit, hosts);
 
 		arrRelease(resultArr, row);
@@ -43,7 +46,7 @@ int main(){
 }
 
 // Print Array
-void arrPrint(int** &pArr, int row, int col, int &bit, int &hosts){
+void arrPrint(int** &pArr, int row, int col, int &bit, ULL &hosts){
 	system("cls");
 	cout << "\n   IPv4 Calculator by Art.Stea1th (Stanislav Kuzmitch)\n\n";
 
@@ -83,7 +86,7 @@ void arrPrintDescription(int n){
 
 
 // Func for get IP adress
-void getIPandMask(int** &pArr, int row, int col, int &bit, int &hosts){
+void getIPandMask(int** &pArr, int row, int col, int &bit, ULL &hosts){
 	int n(0);
 
 	for (int i(0); i < col; i++){
@@ -111,7 +114,7 @@ void getIPandMask(int** &pArr, int row, int col, int &bit, int &hosts){
 }
 
 // Calculate Mask & Wildcard
-void calcMaskWild(int** &pArr, int row, int col, int &bit, int &hosts){
+void calculateAll(int** &pArr, int row, int col, int &bit, ULL &hosts){
 	const int size(9);
 	int support_arr[size];
 
@@ -119,46 +122,35 @@ void calcMaskWild(int** &pArr, int row, int col, int &bit, int &hosts){
 	for (int i(0); i < size; i++)
 		support_arr[i] = pow(2, (size - 1 - i));
 
-	// * 0. IP
-	// pArr[0][0]; pArr[0][1]; pArr[0][2]; pArr[0][3];
-
 	// * 1. Netmask
-	// pArr[1][0]; pArr[1][1]; pArr[1][2]; pArr[1][3];
-
 	for (int i(0); i <= bit / 8 && i < col; i++){
 		if (i != bit / 8) pArr[1][i] = support_arr[0] - support_arr[size - 1];
 		else pArr[1][i] = support_arr[0] - support_arr[bit % 8];
-	}	
+	}
 
 	// * 2. Wildcard
-	// pArr[2][0]; pArr[2][1]; pArr[2][2]; pArr[2][3];
-
 	for (int i(0); i < col; i++)
 		pArr[2][i] = support_arr[0] - support_arr[size - 1] - pArr[1][i];
 
 	// * 3. Network
-	// pArr[3][0]; pArr[3][1]; pArr[3][2]; pArr[3][3];
-
 	for (int i(0); i < col; i++){
 		if (i < bit / 8) pArr[3][i] = pArr[0][i];
 		else if (i == bit / 8){
 			pArr[3][i] = pArr[0][i];
-			while (pArr[3][i] + pArr[2][i] >= support_arr[0] - support_arr[size - 1]){
+			while (pArr[3][i] + pArr[2][i] > support_arr[0] - support_arr[size - 1]){
 				pArr[3][i]--;
 			}
+			if (pArr[3][i] > 0 && i != col - 1) pArr[3][i]--;
 		}
 	}
 
 	// * 4. Host Min
-	// pArr[4][0]; pArr[4][1]; pArr[4][2]; pArr[4][3];
-
 	for (int i(0); i < col; i++){
 		if (i != col - 1) pArr[4][i] = pArr[3][i];
 		else pArr[4][i] = pArr[3][i] + 1;
 	}
-	// * 5. Host Max
-	// pArr[5][0]; pArr[5][1]; pArr[5][2]; pArr[5][3];
 
+	// * 5. Host Max
 	for (int i(0); i < col; i++){
 		if (i < bit / 8) pArr[5][i] = pArr[0][i];
 		else {
@@ -168,16 +160,28 @@ void calcMaskWild(int** &pArr, int row, int col, int &bit, int &hosts){
 	}
 
 	// * 6. Broadcast
-	// pArr[6][0]; pArr[6][1]; pArr[6][2]; pArr[6][3];
-
 	for (int i(0); i < col; i++){
 		if (i < bit / 8) pArr[6][i] = pArr[0][i];
 		else pArr[6][i] = pArr[3][i] + pArr[2][i];
 	}
 
-	// 7. Hosts
 
+	// 7. Hosts
+	hosts = 1;
+	for (int i(0); i < col; i++)
+		hosts *= (pArr[2][i] + 1);
 	
+
+	// Exception for 32bit
+	if (bit == 32){
+		for (int i(0); i < col; i++){
+			if (pArr[5][col - 1 - i] > 0){
+				pArr[5][col - 1 - i]--;
+				break;
+			}
+			else pArr[5][col - 1 - i] = support_arr[0] - support_arr[size - 1];
+		}
+	}
 
 }
 
@@ -234,7 +238,7 @@ void arrRelease(int** &pArr, int row){
 
 	delete[] pArr;
 }
-// Init Array (null)
+// Init Array (nULL)
 void arrInit(int** &pArr, int row, int col){
 
 	for (int i(0); i < row; i++)
