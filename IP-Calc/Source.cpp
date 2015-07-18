@@ -13,10 +13,12 @@ void arrAlloc(int** &pArr, int row, int col),
 	 arrRelease(int** &pArr, int row);
 
 void arrInit(int** &pArr, int row, int col),
-	 arrPrint(int** &pArr, int row, int col, int &bit, ULL &hosts),
+	 arrPrint(int** &pArr, int row, int col, int &bit, ULL &hosts, int &lvl),
 	 arrPrintDescription(int n);
 
-void getIPandMask(int** &pArr, int row, int col, int &bit, ULL &hosts);
+void menuPrint(int lvl);
+
+void getIPandMask(int** &pArr, int row, int col, int &bit, ULL &hosts, int &lvl);
 
 void calculateAll(int** &pArr, int row, int col, int &bit, ULL &hosts);
 
@@ -25,28 +27,26 @@ void cinWait();
 
 // Entry point
 int main(){
-	int **resultArr = nullptr,
-		col(4), row(7);
-	while (true){
-		int bit(0);
-		ULL hosts(0);
+	int **resultArr = nullptr, col(4), row(7);
+	int bit(0); ULL hosts(0);
+	int lvl(0);
 
-		arrAlloc(resultArr, row, col);
-		arrInit(resultArr, row, col);
-		arrPrint(resultArr, row, col, bit, hosts);
+	arrAlloc(resultArr, row, col);
+	arrInit(resultArr, row, col);
+	arrPrint(resultArr, row, col, bit, hosts, lvl);
 
-		getIPandMask(resultArr, row, col, bit, hosts);
-		calculateAll(resultArr, row, col, bit, hosts);
-		arrPrint(resultArr, row, col, bit, hosts);
+	getIPandMask(resultArr, row, col, bit, hosts, lvl);
+	calculateAll(resultArr, row, col, bit, hosts);
+	arrPrint(resultArr, row, col, bit, hosts, lvl);
 
-		arrRelease(resultArr, row);
-		cinWait();
-	}
+	arrRelease(resultArr, row);
+	cinWait();
+
 	return 0;
 }
 
 // Print Array
-void arrPrint(int** &pArr, int row, int col, int &bit, ULL &hosts){
+void arrPrint(int** &pArr, int row, int col, int &bit, ULL &hosts, int &lvl){
 	system("cls");
 	cout << "\n   IPv4 Calculator by Art.Stea1th (Stanislav Kuzmitch)\n\n";
 
@@ -68,6 +68,7 @@ void arrPrint(int** &pArr, int row, int col, int &bit, ULL &hosts){
 	for (int i(0); i < 80; i++) cout << '-';
 
 	cout << "\n";
+	menuPrint(lvl);
 }
 // Print Description Array Strings
 void arrPrintDescription(int n){
@@ -84,14 +85,25 @@ void arrPrintDescription(int n){
 }
 
 
+// Print bottom menu
+void menuPrint(int lvl){
+	
+	switch (lvl){
+	case 0: cout << "\n\t1 - Calculate" << "\n\t0 - Exit"; break;
+	case 1: 
+	case 2: cout << "\n\tUse | <-- Left & Right --> | arrows to shift the range" << "\n\t0 - Return to start-page"; break;
+	default: break;
+	}
+}
+
 
 // Func for get IP adress
-void getIPandMask(int** &pArr, int row, int col, int &bit, ULL &hosts){
+void getIPandMask(int** &pArr, int row, int col, int &bit, ULL &hosts, int &lvl){
 	int n(0);
 
 	for (int i(0); i < col; i++){
 		do {
-			arrPrint(pArr, row, col, bit, hosts);
+			arrPrint(pArr, row, col, bit, hosts, lvl);
 			cout << "\tEnter the [" << i + 1 << "] octet (0 - 255): ";
 			n = getInt();
 			if (n >= 0 && n <= 255){
@@ -102,7 +114,7 @@ void getIPandMask(int** &pArr, int row, int col, int &bit, ULL &hosts){
 		} while (true);
 	}
 	do {
-		arrPrint(pArr, row, col, bit, hosts);
+		arrPrint(pArr, row, col, bit, hosts, lvl);
 		cout << "\tEnter bitmask (0 - 32): ";
 		n = getInt();
 		if (n >= 0 && n <= 32){
@@ -112,7 +124,6 @@ void getIPandMask(int** &pArr, int row, int col, int &bit, ULL &hosts){
 		}
 	} while (true);
 }
-
 // Calculate Mask & Wildcard
 void calculateAll(int** &pArr, int row, int col, int &bit, ULL &hosts){
 	const int size(9);
@@ -184,6 +195,8 @@ void calculateAll(int** &pArr, int row, int col, int &bit, ULL &hosts){
 	}
 
 }
+
+
 
 // Input
 int getInt(){
