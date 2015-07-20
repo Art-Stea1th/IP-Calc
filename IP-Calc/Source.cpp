@@ -86,7 +86,6 @@ void menuPrint(int menu_lvl){
 	default: break;
 	}
 }
-
 // Draw all screen elements
 void pageDraw(int** &pArr, int row, int col, int &bit, ULL &hosts){
 	int menu_lvl(0);
