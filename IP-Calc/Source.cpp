@@ -1,6 +1,5 @@
 // Art.Stea1th (Stanislav Kuzmitch)
 // Calculator IPv4, Mask, first-last IP, Broadcast etc.
-
 #define ULL unsigned long long
 
 #include <cstdio>
@@ -11,43 +10,52 @@
 using namespace std;
 
 void arrAlloc(int** &pArr, int row, int col),
-	 arrRelease(int** &pArr, int row);
+arrRelease(int** &pArr, int row);
 
 void arrInit(int** &pArr, int row, int col),
-	 arrPrint(int** &pArr, int row, int col, int &bit, ULL &hosts),
-	 arrPrintDescription(int n);
-
-void menuPrint(int lvl);
-void pageDraw(int** &pArr, int row, int col, int &bit, ULL &hosts);
+arrPrint(int** &pArr, int row, int col, int &bit, ULL &hosts),
+arrPrintDescription(int n);
 
 void getIPandMask(int** &pArr, int row, int col, int &bit, ULL &hosts);
+
 void calculateAll(int** &pArr, int row, int col, int &bit, ULL &hosts);
 
 int getInt();
 void cinWait();
 
 // Entry point
-int main(){
-	int **resultArr = nullptr, col(4), row(7);
-	int bit(0); ULL hosts(0);
+int main() {
+	int **resultArr = nullptr,
+		col(4), row(7);
+	while (true) {
+		int bit(0);
+		ULL hosts(0);
 
-	pageDraw(resultArr, row, col, bit, hosts);
+		arrAlloc(resultArr, row, col);
+		arrInit(resultArr, row, col);
+		arrPrint(resultArr, row, col, bit, hosts);
 
-	cinWait();
+		getIPandMask(resultArr, row, col, bit, hosts);
+		calculateAll(resultArr, row, col, bit, hosts);
+		arrPrint(resultArr, row, col, bit, hosts);
+
+		arrRelease(resultArr, row);
+		cinWait();
+	}
 	return 0;
 }
 
 // Print Array
-void arrPrint(int** &pArr, int row, int col, int &bit, ULL &hosts){
+void arrPrint(int** &pArr, int row, int col, int &bit, ULL &hosts) {
 	system("cls");
 	cout << "\n   IPv4 Calculator by Art.Stea1th (Stanislav Kuzmitch)\n\n";
 
 	for (int i(0); i < 80; i++) cout << '-';
 
 	cout << "\n";
-	for (int i(0); i < row; i++){
+	for (int i(0); i < row; i++) {
 		arrPrintDescription(i);
-		for (int j(0); j < col; j++){
+		for (int j(0); j < col; j++) {
 			cout << setw(3) << pArr[i][j];
 			if (j != col - 1) cout << '.';
 		}
@@ -62,8 +70,8 @@ void arrPrint(int** &pArr, int row, int col, int &bit, ULL &hosts){
 	cout << "\n";
 }
 // Print Description Array Strings
-void arrPrintDescription(int n){
-	switch (n){
+void arrPrintDescription(int n) {
+	switch (n) {
 	case 0: cout << setw(16) << "Adress: "; break;
 	case 1: cout << setw(16) << "Netmask: "; break;
 	case 2: cout << setw(16) << "Wildcard: "; break;
@@ -76,39 +84,17 @@ void arrPrintDescription(int n){
 }
 
 
-// Print bottom menu
-void menuPrint(int menu_lvl){
-	
-	switch (menu_lvl){
-	case 0: cout << "\n\t1 - Calculate" << "\n\t0 - Exit"; break;
-	case 1: 
-	case 2: cout << "\n\tUse | <-- Left & Right --> | arrows to shift the range" << "\n\t0 - Return to start-page"; break;
-	default: break;
-	}
-}
-// Draw all screen elements
-void pageDraw(int** &pArr, int row, int col, int &bit, ULL &hosts){
-	int menu_lvl(0);
-	arrAlloc(pArr, row, col);
-	arrInit(pArr, row, col);
-
-	arrPrint(pArr, row, col, bit, hosts);
-	menuPrint(menu_lvl);
-
-	arrRelease(pArr, row);
-}
-
 
 // Func for get IP adress
-void getIPandMask(int** &pArr, int row, int col, int &bit, ULL &hosts){
+void getIPandMask(int** &pArr, int row, int col, int &bit, ULL &hosts) {
 	int n(0);
 
-	for (int i(0); i < col; i++){
+	for (int i(0); i < col; i++) {
 		do {
-			arrPrint(pArr, row, col, bit, hosts, lvl);
+			arrPrint(pArr, row, col, bit, hosts);
 			cout << "\tEnter the [" << i + 1 << "] octet (0 - 255): ";
 			n = getInt();
-			if (n >= 0 && n <= 255){
+			if (n >= 0 && n <= 255) {
 				pArr[0][i] = n;
 				n = 0;
 				break;
@@ -116,18 +102,19 @@ void getIPandMask(int** &pArr, int row, int col, int &bit, ULL &hosts){
 		} while (true);
 	}
 	do {
-		arrPrint(pArr, row, col, bit, hosts, lvl);
+		arrPrint(pArr, row, col, bit, hosts);
 		cout << "\tEnter bitmask (0 - 32): ";
 		n = getInt();
-		if (n >= 0 && n <= 32){
+		if (n >= 0 && n <= 32) {
 			bit = n;
 			n = 0;
 			break;
 		}
 	} while (true);
 }
-// Calculate Mask, Wildcard, first-last IP, Broadcast etc.
-void calculateAll(int** &pArr, int row, int col, int &bit, ULL &hosts){
+
+// Calculate Mask & Wildcard
+void calculateAll(int** &pArr, int row, int col, int &bit, ULL &hosts) {
 	const int size(9);
 	int support_arr[size];
 
@@ -136,7 +123,7 @@ void calculateAll(int** &pArr, int row, int col, int &bit, ULL &hosts){
 		support_arr[i] = pow(2, (size - 1 - i));
 
 	// * 1. Netmask
-	for (int i(0); i <= bit / 8 && i < col; i++){
+	for (int i(0); i <= bit / 8 && i < col; i++) {
 		if (i != bit / 8) pArr[1][i] = support_arr[0] - support_arr[size - 1];
 		else pArr[1][i] = support_arr[0] - support_arr[bit % 8];
 	}
@@ -146,11 +133,11 @@ void calculateAll(int** &pArr, int row, int col, int &bit, ULL &hosts){
 		pArr[2][i] = support_arr[0] - support_arr[size - 1] - pArr[1][i];
 
 	// * 3. Network
-	for (int i(0); i < col; i++){
+	for (int i(0); i < col; i++) {
 		if (i < bit / 8) pArr[3][i] = pArr[0][i];
-		else if (i == bit / 8){
+		else if (i == bit / 8) {
 			pArr[3][i] = pArr[0][i];
-			while (pArr[3][i] + pArr[2][i] > support_arr[0] - support_arr[size - 1]){
+			while (pArr[3][i] + pArr[2][i] > support_arr[0] - support_arr[size - 1]) {
 				pArr[3][i]--;
 			}
 			if (pArr[3][i] > 0) pArr[3][i]--;
@@ -158,13 +145,13 @@ void calculateAll(int** &pArr, int row, int col, int &bit, ULL &hosts){
 	}
 
 	// * 4. Host Min
-	for (int i(0); i < col; i++){
+	for (int i(0); i < col; i++) {
 		if (i != col - 1) pArr[4][i] = pArr[3][i];
 		else pArr[4][i] = pArr[3][i] + 1;
 	}
 
 	// * 5. Host Max
-	for (int i(0); i < col; i++){
+	for (int i(0); i < col; i++) {
 		if (i < bit / 8) pArr[5][i] = pArr[0][i];
 		else {
 			if (i != col - 1) pArr[5][i] = pArr[3][i] + pArr[2][i];
@@ -173,7 +160,7 @@ void calculateAll(int** &pArr, int row, int col, int &bit, ULL &hosts){
 	}
 
 	// * 6. Broadcast
-	for (int i(0); i < col; i++){
+	for (int i(0); i < col; i++) {
 		if (i < bit / 8) pArr[6][i] = pArr[0][i];
 		else pArr[6][i] = pArr[3][i] + pArr[2][i];
 	}
@@ -183,12 +170,12 @@ void calculateAll(int** &pArr, int row, int col, int &bit, ULL &hosts){
 	hosts = 1;
 	for (int i(0); i < col; i++)
 		hosts *= (pArr[2][i] + 1);
-	
+
 
 	// Exception for 32bit
-	if (bit == 32){
-		for (int i(0); i < col; i++){
-			if (pArr[5][col - 1 - i] > 0){
+	if (bit == 32) {
+		for (int i(0); i < col; i++) {
+			if (pArr[5][col - 1 - i] > 0) {
 				pArr[5][col - 1 - i]--;
 				break;
 			}
@@ -198,52 +185,20 @@ void calculateAll(int** &pArr, int row, int col, int &bit, ULL &hosts){
 
 }
 
-
-int navAndManip(int menu_lvl){
-	int n(0);
-
-	switch (menu_lvl){
-	case 0: {
-
-		break;
-	}
-	case 1: {
-
-		break;
-	}
-	default: break;
-	}
-
-	return 0;
-}
-// Get one symbol for menu serfing and shift range
-int getSymbol(){
-	int k, n(0);
-	bool isDone(false);
-
-	while (!isDone){
-		k = getch();
-		if ((k >= '0') && (k <= '9')){
-			n = k - '0';
-			isDone = true;
-		}
-	}
-	return n;
-}
-// Input data
-int getInt(){
+// Input
+int getInt() {
 	int k, n = 0, c = 0, q = 0;
 	cin.clear(); cin.sync();
 
-	while (true){
+	while (true) {
 		k = getch();
-		if ((k >= '0') && (k <= '9')){
+		if ((k >= '0') && (k <= '9')) {
 			printf("%c", k);
 			n = n * 10 + k - '0';
 			c++;
 			q++;
 		}
-		if (k == 8){
+		if (k == 8) {
 			putch(8);
 			putch(' ');
 			putch(8);
@@ -260,7 +215,7 @@ int getInt(){
 	return n;
 }
 // Pause
-void cinWait(){
+void cinWait() {
 	cin.clear();
 	cin.sync();
 	cin.get();
@@ -269,14 +224,14 @@ void cinWait(){
 
 
 // Allocates memory for an array
-void arrAlloc(int** &pArr, int row, int col){
+void arrAlloc(int** &pArr, int row, int col) {
 	pArr = new int*[row];
 
 	for (int i(0); i < row; i++)
 		pArr[i] = new int[col];
 }
 // Release memory for an array
-void arrRelease(int** &pArr, int row){
+void arrRelease(int** &pArr, int row) {
 
 	for (int i(0); i < row; i++)
 		delete[] pArr[i];
@@ -284,7 +239,7 @@ void arrRelease(int** &pArr, int row){
 	delete[] pArr;
 }
 // Init Array (nULL)
-void arrInit(int** &pArr, int row, int col){
+void arrInit(int** &pArr, int row, int col) {
 
 	for (int i(0); i < row; i++)
 		for (int j(0); j < col; j++)
