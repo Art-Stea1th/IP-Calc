@@ -1,6 +1,10 @@
 #include "IpRepresentation.h"
 
 
+const ui8 & IpRepresentation::size() const {
+	return ip_.size();
+}
+
 const ui8 & IpRepresentation::octet_get(const ui8 & ndx) const {
 	return ip_.at(ndx);
 }
