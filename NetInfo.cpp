@@ -1,5 +1,6 @@
 #include "NetInfo.h"
 #include <iomanip>
+#include <conio.h>
 
 ///  == Temporary methods solution  =====
 ///  == Transferred from the old func. ==
@@ -92,6 +93,77 @@ void NetInfo::calculate() {
 	}
 }
 
+void NetInfo::get_from_console() {
+	using namespace std;
+	int n(0);
+
+	for (int i(0); i < oct_count_; i++) {
+		do {
+			show_to_console();
+			wcout << L"\tEnter the [" << i + 1 << L"] octet (0 - 255): ";
+			n = get_int();
+			if (n >= 0 && n <= 255) {
+				netinfo_.at(0).octet_set(i, n);
+				n = 0;
+				break;
+			}
+		} while (true);
+	}
+	do {
+		show_to_console();
+		wcout << L"\tEnter bitmask (0 - 32): ";
+		n = get_int();
+		if (n >= 0 && n <= 32) {
+			bitmask_ = n;
+			n = 0;
+			break;
+		}
+	} while (true);
+}
+
+void NetInfo::show_to_console_description(const ui8 & n) const {
+	using namespace std;
+
+	switch (n) {
+	case 0: wcout << setw(16) << L"Adress: "; break;
+	case 1: wcout << setw(16) << L"Netmask: "; break;
+	case 2: wcout << setw(16) << L"Wildcard: "; break;
+	case 3: wcout << setw(16) << L"Network: "; break;
+	case 4: wcout << setw(16) << L"Host Min: "; break;
+	case 5: wcout << setw(16) << L"Host Max: "; break;
+	case 6: wcout << setw(16) << L"Broadcast: "; break;
+	default: wcout << setw(16); break;
+	}
+}
+
+int NetInfo::get_int() const {
+	int k, n = 0, c = 0, q = 0;
+
+	while (true) {
+		k = _getch();
+		if ((k >= '0') && (k <= '9')) {
+			printf("%c", k);
+			n = n * 10 + k - '0';
+			c++;
+			q++;
+		}
+		if (k == 8) {
+			_putch(8);
+			_putch(' ');
+			_putch(8);
+			n = n / 10;
+			q--;
+			if (q < 0) q = 0;
+			c--;
+			if (c < 0) c = 0;
+		}
+
+		if ((k == 13) && (c != 0) && (q != 0)) break;
+	}
+
+	return n;
+}
+
 void NetInfo::show_to_console() const {
 	using namespace std;
 	system("cls");
@@ -116,21 +188,6 @@ void NetInfo::show_to_console() const {
 	for (int i(0); i < 80; i++) wcout << L'-';
 
 	wcout << L"\n";
-}
-
-void NetInfo::show_to_console_description(const ui8 & n) const {
-	using namespace std;
-
-	switch (n) {
-	case 0: wcout << setw(16) << L"Adress: "; break;
-	case 1: wcout << setw(16) << L"Netmask: "; break;
-	case 2: wcout << setw(16) << L"Wildcard: "; break;
-	case 3: wcout << setw(16) << L"Network: "; break;
-	case 4: wcout << setw(16) << L"Host Min: "; break;
-	case 5: wcout << setw(16) << L"Host Max: "; break;
-	case 6: wcout << setw(16) << L"Broadcast: "; break;
-	default: wcout << setw(16); break;
-	}
 }
 
 ///  ====================================

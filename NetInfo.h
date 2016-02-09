@@ -37,7 +37,11 @@ class NetInfo {
 		calculate_hostmin(),
 		calculate_hostmax(),
 		calculate_broadcast(),
-		calculate_hosts();	
+		calculate_hosts();
+	void
+		show_to_console_description(const ui8 & n) const;
+	int
+		get_int() const;
 	///  ====================================
 
 public:
@@ -45,8 +49,8 @@ public:
 	///  == Temporary methods solution  =====
 	///  == Transferred from the old func. ==
 	void calculate();
+	void get_from_console();
 	void show_to_console() const;
-	void show_to_console_description(const ui8 & n) const;
 	///  ====================================
 
 	const ui8 & size() const;
