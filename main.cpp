@@ -1,35 +1,15 @@
 // Art.Stea1th (Stanislav Kuzmitch)
 // Calculator IPv4, Mask, first-last IP, Broadcast etc.
-#define ULL unsigned long long
 
-#include <cstdio>
-#include <conio.h>
-
-#include <iostream>
-#include <iomanip>
-using namespace std;
-
-void arrAlloc(int** &pArr, int row, int col),
-arrRelease(int** &pArr, int row);
-
-void arrInit(int** &pArr, int row, int col),
-arrPrint(int** &pArr, int row, int col, int &bit, ULL &hosts),
-arrPrintDescription(int n);
-
-void getIPandMask(int** &pArr, int row, int col, int &bit, ULL &hosts);
-
-void calculateAll(int** &pArr, int row, int col, int &bit, ULL &hosts);
-
-int getInt();
-void cinWait();
+#include "Header.h"
 
 // Entry point
-int main() {
+int _tmain(int argc, _TCHAR *argv[], _TCHAR *envp[]) {
 	int **resultArr = nullptr,
 		col(4), row(7);
 	while (true) {
 		int bit(0);
-		ULL hosts(0);
+		ull hosts(0);
 
 		arrAlloc(resultArr, row, col);
 		arrInit(resultArr, row, col);
@@ -40,59 +20,67 @@ int main() {
 		arrPrint(resultArr, row, col, bit, hosts);
 
 		arrRelease(resultArr, row);
-		cinWait();
+
+		std::wcout << L"   ";
+		system("pause");
 	}
 	return 0;
 }
 
 // Print Array
-void arrPrint(int** &pArr, int row, int col, int &bit, ULL &hosts) {
+void arrPrint(int** &pArr, int row, int col, int &bit, ull &hosts) {
+	using namespace std;
+
 	system("cls");
-	cout << "\n   IPv4 Calculator by Art.Stea1th (Stanislav Kuzmitch)\n\n";
 
-	for (int i(0); i < 80; i++) cout << '-';
+	wcout << L"\n   IPv4 Calculator by Art.Stea1th (Stanislav Kuzmitch)\n\n";
 
-	cout << "\n";
+	for (int i(0); i < 80; i++) wcout << L'-';
+
+	wcout << L"\n";
 	for (int i(0); i < row; i++) {
 		arrPrintDescription(i);
 		for (int j(0); j < col; j++) {
-			cout << setw(3) << pArr[i][j];
-			if (j != col - 1) cout << '.';
+			wcout << setw(3) << pArr[i][j];
+			if (j != col - 1) wcout << L'.';
 		}
-		if (i == 1) cout << " | " << bit << " bit\n";
-		else if (i == 2) cout << "\n\n";
-		else cout << '\n';
+		if (i == 1) wcout << L" | " << bit << L" bit\n";
+		else if (i == 2) wcout << L"\n\n";
+		else wcout << L'\n';
 	}
-	cout << '\n' << setw(16) << "Hosts: " << setw(15) << hosts << "\n\n";
+	wcout << L'\n' << setw(16) << L"Hosts: " << setw(15) << hosts << L"\n\n";
 
-	for (int i(0); i < 80; i++) cout << '-';
+	for (int i(0); i < 80; i++) wcout << L'-';
 
-	cout << "\n";
+	wcout << L"\n";
 }
+
 // Print Description Array Strings
 void arrPrintDescription(int n) {
+	using namespace std;
+
 	switch (n) {
-	case 0: cout << setw(16) << "Adress: "; break;
-	case 1: cout << setw(16) << "Netmask: "; break;
-	case 2: cout << setw(16) << "Wildcard: "; break;
-	case 3: cout << setw(16) << "Network: "; break;
-	case 4: cout << setw(16) << "Host Min: "; break;
-	case 5: cout << setw(16) << "Host Max: "; break;
-	case 6: cout << setw(16) << "Broadcast: "; break;
-	default: cout << setw(16); break;
+	case 0: wcout << setw(16) << L"Adress: "; break;
+	case 1: wcout << setw(16) << L"Netmask: "; break;
+	case 2: wcout << setw(16) << L"Wildcard: "; break;
+	case 3: wcout << setw(16) << L"Network: "; break;
+	case 4: wcout << setw(16) << L"Host Min: "; break;
+	case 5: wcout << setw(16) << L"Host Max: "; break;
+	case 6: wcout << setw(16) << L"Broadcast: "; break;
+	default: wcout << setw(16); break;
 	}
 }
 
-
-
 // Func for get IP adress
-void getIPandMask(int** &pArr, int row, int col, int &bit, ULL &hosts) {
+void getIPandMask(int** &pArr, int row, int col, int &bit, ull &hosts) {
+	using namespace std;
+
 	int n(0);
 
 	for (int i(0); i < col; i++) {
 		do {
 			arrPrint(pArr, row, col, bit, hosts);
-			cout << "\tEnter the [" << i + 1 << "] octet (0 - 255): ";
+			wcout << L"\tEnter the [" << i + 1 << L"] octet (0 - 255): ";
 			n = getInt();
 			if (n >= 0 && n <= 255) {
 				pArr[0][i] = n;
@@ -103,7 +91,7 @@ void getIPandMask(int** &pArr, int row, int col, int &bit, ULL &hosts) {
 	}
 	do {
 		arrPrint(pArr, row, col, bit, hosts);
-		cout << "\tEnter bitmask (0 - 32): ";
+		wcout << L"\tEnter bitmask (0 - 32): ";
 		n = getInt();
 		if (n >= 0 && n <= 32) {
 			bit = n;
@@ -114,7 +102,7 @@ void getIPandMask(int** &pArr, int row, int col, int &bit, ULL &hosts) {
 }
 
 // Calculate Mask & Wildcard
-void calculateAll(int** &pArr, int row, int col, int &bit, ULL &hosts) {
+void calculateAll(int** &pArr, int row, int col, int &bit, ull &hosts) {
 	const int size(9);
 	int support_arr[size];
 
@@ -188,7 +176,6 @@ void calculateAll(int** &pArr, int row, int col, int &bit, ULL &hosts) {
 // Input
 int getInt() {
 	int k, n = 0, c = 0, q = 0;
-	cin.clear(); cin.sync();
 
 	while (true) {
 		k = getch();
@@ -214,14 +201,6 @@ int getInt() {
 
 	return n;
 }
-// Pause
-void cinWait() {
-	cin.clear();
-	cin.sync();
-	cin.get();
-}
-
-
 
 // Allocates memory for an array
 void arrAlloc(int** &pArr, int row, int col) {
@@ -230,6 +209,7 @@ void arrAlloc(int** &pArr, int row, int col) {
 	for (int i(0); i < row; i++)
 		pArr[i] = new int[col];
 }
+
 // Release memory for an array
 void arrRelease(int** &pArr, int row) {
 
@@ -238,6 +218,7 @@ void arrRelease(int** &pArr, int row) {
 
 	delete[] pArr;
 }
+
 // Init Array (nULL)
 void arrInit(int** &pArr, int row, int col) {
 
