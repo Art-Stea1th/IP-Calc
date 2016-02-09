@@ -10,67 +10,16 @@ int _tmain(int argc, _TCHAR *argv[], _TCHAR *envp[]) {
 	
 	while (true) {
 		NetInfo netinfo;
-		Print(netinfo);
+		netinfo.show_to_console();
 
 		GetIPandMask(netinfo);
 		netinfo.calculate();
-		Print(netinfo);
+		netinfo.show_to_console();
 
 		std::wcout << L"   ";
 		system("pause");
 	}
 	return 0;
-}
-
-// Print Array
-void Print(NetInfo &netinfo) {
-	using namespace std;
-	//======================================
-	ui8
-		col(netinfo.operator[](0).size()),
-		row(netinfo.size()),
-		bit(netinfo.bitmask());
-	ui32
-		hosts(netinfo.hosts());
-	//======================================
-	system("cls");
-
-	wcout << L"\n   IPv4 Calculator by Art.Stea1th (Stanislav Kuzmitch)\n\n";
-
-	for (int i(0); i < 80; i++) wcout << L'-';
-
-	wcout << L"\n";
-	for (int i(0); i < row; i++) {
-		PrintDescription(i);
-		for (int j(0); j < col; j++) {
-			wcout << setw(3) << netinfo[i][j];
-			if (j != col - 1) wcout << L'.';
-		}
-		if (i == 1) wcout << L" | " << bit << L" bit\n";
-		else if (i == 2) wcout << L"\n\n";
-		else wcout << L'\n';
-	}
-	wcout << L'\n' << setw(16) << L"Hosts: " << setw(15) << hosts << L"\n\n";
-
-	for (int i(0); i < 80; i++) wcout << L'-';
-
-	wcout << L"\n";
-}
-
-// Print Description Array Strings
-void PrintDescription(int n) {
-	using namespace std;
-
-	switch (n) {
-	case 0: wcout << setw(16) << L"Adress: "; break;
-	case 1: wcout << setw(16) << L"Netmask: "; break;
-	case 2: wcout << setw(16) << L"Wildcard: "; break;
-	case 3: wcout << setw(16) << L"Network: "; break;
-	case 4: wcout << setw(16) << L"Host Min: "; break;
-	case 5: wcout << setw(16) << L"Host Max: "; break;
-	case 6: wcout << setw(16) << L"Broadcast: "; break;
-	default: wcout << setw(16); break;
-	}
 }
 
 // Func for get IP adress
@@ -88,7 +37,7 @@ void GetIPandMask(NetInfo &netinfo) {
 
 	for (int i(0); i < col; i++) {
 		do {
-			Print(netinfo);
+			netinfo.show_to_console();
 			wcout << L"\tEnter the [" << i + 1 << L"] octet (0 - 255): ";
 			n = GetInt();
 			if (n >= 0 && n <= 255) {
@@ -99,7 +48,7 @@ void GetIPandMask(NetInfo &netinfo) {
 		} while (true);
 	}
 	do {
-		Print(netinfo);
+		netinfo.show_to_console();
 		wcout << L"\tEnter bitmask (0 - 32): ";
 		n = GetInt();
 		if (n >= 0 && n <= 32) {
@@ -108,11 +57,6 @@ void GetIPandMask(NetInfo &netinfo) {
 			break;
 		}
 	} while (true);
-}
-
-// Calculate All
-void CalculateAll(NetInfo &netinfo) {
-	netinfo.calculate();
 }
 
 // Input
