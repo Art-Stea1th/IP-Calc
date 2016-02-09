@@ -7,17 +7,15 @@
 #include <iostream>
 #include <iomanip>
 
+#include "NetInfo.h"
+
 typedef unsigned long long ull;
 
-void arrAlloc(int** &pArr, int row, int col),
-arrRelease(int** &pArr, int row);
-
-void arrInit(int** &pArr, int row, int col),
-arrPrint(int** &pArr, int row, int col, int &bit, ull &hosts),
+void arrPrint(NetInfo &pArr, int row, int col, int &bit, ull &hosts),
 arrPrintDescription(int n);
 
-void getIPandMask(int** &pArr, int row, int col, int &bit, ull &hosts);
+void getIPandMask(NetInfo &pArr, int row, int col, int &bit, ull &hosts);
 
-void calculateAll(int** &pArr, int row, int col, int &bit, ull &hosts);
+void calculateAll(NetInfo &pArr, int row, int col, int &bit, ull &hosts);
 
 int getInt();

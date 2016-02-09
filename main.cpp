@@ -3,23 +3,22 @@
 
 #include "Header.h"
 
+
+
 // Entry point
 int _tmain(int argc, _TCHAR *argv[], _TCHAR *envp[]) {
-	int **resultArr = nullptr,
-		col(4), row(7);
+	NetInfo netinfo;
+
+	int	col(4), row(7);
 	while (true) {
 		int bit(0);
 		ull hosts(0);
 
-		arrAlloc(resultArr, row, col);
-		arrInit(resultArr, row, col);
-		arrPrint(resultArr, row, col, bit, hosts);
+		arrPrint(netinfo, row, col, bit, hosts);
 
-		getIPandMask(resultArr, row, col, bit, hosts);
-		calculateAll(resultArr, row, col, bit, hosts);
-		arrPrint(resultArr, row, col, bit, hosts);
-
-		arrRelease(resultArr, row);
+		getIPandMask(netinfo, row, col, bit, hosts);
+		calculateAll(netinfo, row, col, bit, hosts);
+		arrPrint(netinfo, row, col, bit, hosts);
 
 		std::wcout << L"   ";
 		system("pause");
@@ -28,7 +27,7 @@ int _tmain(int argc, _TCHAR *argv[], _TCHAR *envp[]) {
 }
 
 // Print Array
-void arrPrint(int** &pArr, int row, int col, int &bit, ull &hosts) {
+void arrPrint(NetInfo &pArr, int row, int col, int &bit, ull &hosts) {
 	using namespace std;
 
 	system("cls");
@@ -72,7 +71,7 @@ void arrPrintDescription(int n) {
 }
 
 // Func for get IP adress
-void getIPandMask(int** &pArr, int row, int col, int &bit, ull &hosts) {
+void getIPandMask(NetInfo &pArr, int row, int col, int &bit, ull &hosts) {
 	using namespace std;
 
 	int n(0);
@@ -102,13 +101,13 @@ void getIPandMask(int** &pArr, int row, int col, int &bit, ull &hosts) {
 }
 
 // Calculate Mask & Wildcard
-void calculateAll(int** &pArr, int row, int col, int &bit, ull &hosts) {
+void calculateAll(NetInfo &pArr, int row, int col, int &bit, ull &hosts) {
 	const int size(9);
 	int support_arr[size];
 
 	// Fill support_arr | 256 | 128 | 64 | 32 | 16 | 8 | 4 | 2 | 1 |
 	for (int i(0); i < size; i++)
-		support_arr[i] = pow(2, (size - 1 - i));
+		support_arr[i] = static_cast<int>(pow(2, (size - 1 - i)));
 
 	// * 1. Netmask
 	for (int i(0); i <= bit / 8 && i < col; i++) {
@@ -178,7 +177,7 @@ int getInt() {
 	int k, n = 0, c = 0, q = 0;
 
 	while (true) {
-		k = getch();
+		k = _getch();
 		if ((k >= '0') && (k <= '9')) {
 			printf("%c", k);
 			n = n * 10 + k - '0';
@@ -186,9 +185,9 @@ int getInt() {
 			q++;
 		}
 		if (k == 8) {
-			putch(8);
-			putch(' ');
-			putch(8);
+			_putch(8);
+			_putch(' ');
+			_putch(8);
 			n = n / 10;
 			q--;
 			if (q < 0) q = 0;
@@ -200,29 +199,4 @@ int getInt() {
 	}
 
 	return n;
-}
-
-// Allocates memory for an array
-void arrAlloc(int** &pArr, int row, int col) {
-	pArr = new int*[row];
-
-	for (int i(0); i < row; i++)
-		pArr[i] = new int[col];
-}
-
-// Release memory for an array
-void arrRelease(int** &pArr, int row) {
-
-	for (int i(0); i < row; i++)
-		delete[] pArr[i];
-
-	delete[] pArr;
-}
-
-// Init Array (nULL)
-void arrInit(int** &pArr, int row, int col) {
-
-	for (int i(0); i < row; i++)
-		for (int j(0); j < col; j++)
-			pArr[i][j] = 0;
 }
