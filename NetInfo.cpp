@@ -8,7 +8,7 @@
 /// Fill support_arr | 256 | 128 | 64 | 32 | 16 | 8 | 4 | 2 | 1 |
 void NetInfo::fill_support_arr() {
 	for (int i(0); i < support_size_; i++)
-		support_arr.push_back(static_cast<int>(pow(2, (support_size_ - 1 - i))));
+		support_arr.push_back(static_cast<short>(pow(2, (support_size_ - 1 - i))));
 }
 
 /// * 1. Netmask
