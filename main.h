@@ -1,6 +1,5 @@
 #pragma once
 #include "NetInfo.h"
-//#include <sstream>
 
 #include <windows.h>
 #include <tchar.h>
