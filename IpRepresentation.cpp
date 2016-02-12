@@ -9,7 +9,6 @@ const ui8 & IpRepresentation::octet_get(const ui8 & ndx) const {
 	return ip_.at(ndx);
 }
 
-// TMP: Local processing exceptions
 void IpRepresentation::octet_set(const ui8 & ndx, const ui8 & val) {
 	//try {
 	//	if (val > std::numeric_limits<ui8>::max())
