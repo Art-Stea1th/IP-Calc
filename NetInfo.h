@@ -21,8 +21,7 @@ class NetInfo {
 	//  hosts_ max = unsigned int
 	ui32 hosts_ = 0;
 
-	///  == Temporary methods solution  =====
-
+	//  == Temporary methods solution  =====
 	///  == Temp fields =====================
 	const int oct_count_ = 4;
 	const int support_size_ = 9;
@@ -38,22 +37,13 @@ class NetInfo {
 		calculate_hostmax(),
 		calculate_broadcast(),
 		calculate_hosts();
-	void
-		show_to_console_description(const ui8 & n) const;
-	int
-		get_int() const;
 	///  ====================================
 
 public:
 
-	///  == Temporary methods solution  =====
-	///  == Transferred from the old func. ==
 	void calculate();
-	void get_from_console();
-	void show_to_console() const;
-	///  ====================================
 
-	const ui8 & size() const;
+	const size_t & size() const;
 
 	IpRepresentation & operator[](const int &ndx);
 	ui8 & bitmask();

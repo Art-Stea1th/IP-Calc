@@ -1,7 +1,7 @@
 #include "IpRepresentation.h"
 
 
-const ui8 & IpRepresentation::size() const {
+const size_t & IpRepresentation::size() const {
 	return ip_.size();
 }
 

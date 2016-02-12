@@ -18,7 +18,7 @@ private:
 		ip_;
 
 public:
-	const ui8 & size() const;
+	const size_t & size() const;
 
 	const ui8 & octet_get(const ui8 & ndx) const;
 	void octet_set(const ui8 & ndx, const ui8 & val);

@@ -2,7 +2,7 @@
 #include <iomanip>
 #include <conio.h>
 
-///  == Temporary methods solution  =====
+//  == Temporary methods solution  =====
 ///  == Transferred from the old func. ==
 
 /// Fill support_arr | 256 | 128 | 64 | 32 | 16 | 8 | 4 | 2 | 1 |
@@ -93,106 +93,9 @@ void NetInfo::calculate() {
 	}
 }
 
-void NetInfo::get_from_console() {
-	using namespace std;
-	int n(0);
-
-	for (int i(0); i < oct_count_; i++) {
-		do {
-			show_to_console();
-			wcout << L"\tEnter the [" << i + 1 << L"] octet (0 - 255): ";
-			n = get_int();
-			if (n >= 0 && n <= 255) {
-				netinfo_.at(0).octet_set(i, n);
-				n = 0;
-				break;
-			}
-		} while (true);
-	}
-	do {
-		show_to_console();
-		wcout << L"\tEnter bitmask (0 - 32): ";
-		n = get_int();
-		if (n >= 0 && n <= 32) {
-			bitmask_ = n;
-			n = 0;
-			break;
-		}
-	} while (true);
-}
-
-void NetInfo::show_to_console_description(const ui8 & n) const {
-	using namespace std;
-
-	switch (n) {
-	case 0: wcout << setw(16) << L"Adress: "; break;
-	case 1: wcout << setw(16) << L"Netmask: "; break;
-	case 2: wcout << setw(16) << L"Wildcard: "; break;
-	case 3: wcout << setw(16) << L"Network: "; break;
-	case 4: wcout << setw(16) << L"Host Min: "; break;
-	case 5: wcout << setw(16) << L"Host Max: "; break;
-	case 6: wcout << setw(16) << L"Broadcast: "; break;
-	default: wcout << setw(16); break;
-	}
-}
-
-int NetInfo::get_int() const {
-	int k, n = 0, c = 0, q = 0;
-
-	while (true) {
-		k = _getch();
-		if ((k >= '0') && (k <= '9')) {
-			printf("%c", k);
-			n = n * 10 + k - '0';
-			c++;
-			q++;
-		}
-		if (k == 8) {
-			_putch(8);
-			_putch(' ');
-			_putch(8);
-			n = n / 10;
-			q--;
-			if (q < 0) q = 0;
-			c--;
-			if (c < 0) c = 0;
-		}
-
-		if ((k == 13) && (c != 0) && (q != 0)) break;
-	}
-
-	return n;
-}
-
-void NetInfo::show_to_console() const {
-	using namespace std;
-	system("cls");
-
-	wcout << L"\n   IPv4 Calculator by Art.Stea1th (Stanislav Kuzmitch)\n\n";
-
-	for (int i(0); i < 80; i++) wcout << L'-';
-
-	wcout << L"\n";
-	for (int i(0); i < netinfo_.size(); i++) {
-		show_to_console_description(i);
-		for (int j(0); j < oct_count_; j++) {
-			wcout << setw(3) << netinfo_.at(i).octet_get(j);
-			if (j != oct_count_ - 1) wcout << L'.';
-		}
-		if (i == 1) wcout << L" | " << bitmask_ << L" bit\n";
-		else if (i == 2) wcout << L"\n\n";
-		else wcout << L'\n';
-	}
-	wcout << L'\n' << setw(16) << L"Hosts: " << setw(15) << hosts_ << L"\n\n";
-
-	for (int i(0); i < 80; i++) wcout << L'-';
-
-	wcout << L"\n";
-}
-
 ///  ====================================
 
-const ui8 & NetInfo::size() const {
+const size_t & NetInfo::size() const {
 	return netinfo_.size();
 }
 
