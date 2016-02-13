@@ -1,16 +1,16 @@
-#include "IpRepresentation.h"
+#include "IPv4.h"
 
 
-const size_t & IpRepresentation::size() const {
+const size_t & CIPv4::size() const {
 	return ip_.size();
 }
 
-const ui8 & IpRepresentation::octet_get(const ui8 & ndx) const {
+const ui8 & CIPv4::octet_get(const ui8 & ndx) const {
 	return ip_.at(ndx);
 }
 
 // TMP: Local processing exceptions
-void IpRepresentation::octet_set(const ui8 & ndx, const ui8 & val) {
+void CIPv4::octet_set(const ui8 & ndx, const ui8 & val) {
 	//try {
 	//	if (val > std::numeric_limits<ui8>::max())
 	//		throw(std::exception("out of range \"uint_fast8_t\" type"));
@@ -20,11 +20,11 @@ void IpRepresentation::octet_set(const ui8 & ndx, const ui8 & val) {
 	//catch (...) { std::wcout << "\n\nException: unknown\n\n";	}
 }
 
-ui8 & IpRepresentation::operator[](const int & ndx) {
+ui8 & CIPv4::operator[](const int & ndx) {
 	return ip_.at(ndx);
 }
 
-void IpRepresentation::operator()(
+void CIPv4::operator()(
 	const ui8 & oct1,
 	const ui8 & oct2,
 	const ui8 & oct3,
@@ -37,11 +37,11 @@ void IpRepresentation::operator()(
 		octet_set(3, oct4);
 }
 
-IpRepresentation::IpRepresentation() { this->operator()(0, 0, 0, 0); }
-IpRepresentation::~IpRepresentation() { ip_.clear(); }
+CIPv4::CIPv4() { this->operator()(0, 0, 0, 0); }
+CIPv4::~CIPv4() { ip_.clear(); }
 
 
-std::wostream & operator<<(std::wostream & wos, const IpRepresentation & obj) {
+std::wostream & operator<<(std::wostream & wos, const CIPv4 & obj) {
 	wos 
 		<< obj.octet_get(0) << L'.'
 		<< obj.octet_get(1) << L'.'

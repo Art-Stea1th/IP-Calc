@@ -7,7 +7,7 @@
 typedef uint_fast8_t ui8;
 
 
-class IpRepresentation {
+class CIPv4 {
 private:
 	//  ip_:
 	//  ...[0] - octet 1
@@ -32,8 +32,8 @@ public:
 		const ui8 & oct4
 		);
 
-	IpRepresentation();
-	~IpRepresentation();
+	CIPv4();
+	~CIPv4();
 };
 
-std::wostream & operator<<(std::wostream & wos, const IpRepresentation & obj);
+std::wostream & operator<<(std::wostream & wos, const CIPv4 & obj);

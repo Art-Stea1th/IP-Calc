@@ -1,5 +1,5 @@
 #include "MainDialog.h"
-#include "NetInfo.h"
+#include "Subnet.h"
 
 // --- private: --- --- --- ---
 
@@ -31,7 +31,7 @@ void CMainDialog::OnCommand(HWND hWnd, int id, HWND hwndCtl, UINT codeNotify) {
 
 		::SendMessage(hWndIpAddrIn, IPM_GETADDRESS, 0L, (LPARAM)&dwIp);
 
-		IpRepresentation ipAddr;
+		CIPv4 ipAddr;
 		ipAddr(
 			FIRST_IPADDRESS(dwIp),
 			SECOND_IPADDRESS(dwIp),
@@ -39,7 +39,7 @@ void CMainDialog::OnCommand(HWND hWnd, int id, HWND hwndCtl, UINT codeNotify) {
 			FOURTH_IPADDRESS(dwIp)
 			);
 
-		NetInfo netInfo;
+		CSubnet netInfo;
 		netInfo[0] = ipAddr;
 
 		HWND hWndComboBox = GetDlgItem(hWnd, IDC_COMBO_BITMASK);

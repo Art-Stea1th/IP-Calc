@@ -1,9 +1,9 @@
 #pragma once
-#include "IpRepresentation.h"
+#include "IPv4.h"
 
 typedef uint_fast32_t ui32;
 
-class NetInfo {
+class CSubnet {
 	//  netinfo_:
 	//      ...[0] - IP Address
 	//      ...[1] - Network Mask
@@ -12,7 +12,7 @@ class NetInfo {
 	//      ...[4] - HostMin
 	//      ...[5] - HostMax
 	//      ...[6] - Broadcast
-	std::vector<IpRepresentation>
+	std::vector<CIPv4>
 		netinfo_;
 
 	//  bitmask_ max = 32
@@ -45,10 +45,10 @@ public:
 
 	const size_t & size() const;
 
-	IpRepresentation & operator[](const int &ndx);
+	CIPv4 & operator[](const int &ndx);
 	ui8 & bitmask();
 	ui32 & hosts();	
 
-	NetInfo();
-	~NetInfo();
+	CSubnet();
+	~CSubnet();
 };

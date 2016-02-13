@@ -18,16 +18,16 @@
     <ClCompile Include="source\Dlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\IpRepresentation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\MainDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\NetInfo.cpp">
+    <ClCompile Include="source\WinMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\WinMain.cpp">
+    <ClCompile Include="source\IPv4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Subnet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,16 +38,16 @@
     <ClInclude Include="source\Dlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\IpRepresentation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\MainDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\NetInfo.h">
+    <ClInclude Include="source\WinMain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\WinMain.h">
+    <ClInclude Include="source\IPv4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Subnet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
