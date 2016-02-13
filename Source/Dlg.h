@@ -4,7 +4,7 @@
 #include <windowsx.h>
 #include <commctrl.h>
 
-#include "Resource.h"
+#include "..\Resources\Resource.h"
 
 class CDlg {
 private:
