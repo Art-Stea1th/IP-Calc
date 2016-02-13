@@ -102,17 +102,17 @@
   <ItemGroup>
     <ClCompile Include="Dlg.cpp" />
     <ClCompile Include="IpRepresentation.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="MainDialog.cpp" />
     <ClCompile Include="NetInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dlg.h" />
-    <ClInclude Include="main.h" />
+    <ClInclude Include="WinMain.h" />
     <ClInclude Include="IpRepresentation.h" />
     <ClInclude Include="MainDialog.h" />
     <ClInclude Include="NetInfo.h" />
-    <ClInclude Include="resource.h" />
+    <ClInclude Include="Resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc" />
