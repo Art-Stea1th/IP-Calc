@@ -1,6 +1,7 @@
 #include "MainDialog.h"
 #include "Subnet.h"
 
+
 // --- private: --- --- --- ---
 
 BOOL CMainDialog::OnInitDialog(HWND hWnd, HWND hwndFocus, LPARAM lParam) {
@@ -26,29 +27,19 @@ void CMainDialog::OnCommand(HWND hWnd, int id, HWND hwndCtl, UINT codeNotify) {
 	switch (LOWORD(id)) {
 	case IDC_BTN_CALCULATE:
 	{
-		HWND hWndIpAddrIn = GetDlgItem(hWnd, IDC_IP_IP_ADDRESS_IN);
-		DWORD dwIp(0L);
-
-		::SendMessage(hWndIpAddrIn, IPM_GETADDRESS, 0L, (LPARAM)&dwIp);
-
-		CIPv4 ipAddr;
-		ipAddr(
-			FIRST_IPADDRESS(dwIp),
-			SECOND_IPADDRESS(dwIp),
-			THIRD_IPADDRESS(dwIp),
-			FOURTH_IPADDRESS(dwIp)
-			);
-
 		CSubnet netInfo;
-		netInfo[0] = ipAddr;
+
+		HWND hWndIpAddrIn = GetDlgItem(hWnd, IDC_IP_IP_ADDRESS_IN);		
+		::SendMessage(hWndIpAddrIn, IPM_GETADDRESS, 0L, (LPARAM)&netInfo[0]);
+
+
+		_TCHAR dwBitmaskBuffer[3];
 
 		HWND hWndComboBox = GetDlgItem(hWnd, IDC_COMBO_BITMASK);
-		_TCHAR dwBitmaskStr[3];
+		::GetWindowText(hWndComboBox, (LPWSTR)dwBitmaskBuffer, 3);
 
-		::GetWindowText(hWndComboBox, (LPWSTR)dwBitmaskStr, 3);
-
-		netInfo.bitmask() = _wtoi(dwBitmaskStr);
-		netInfo.calculate();
+		netInfo.SetBitMask(_wtoi(dwBitmaskBuffer));
+		netInfo.Calculate();
 
 
 		HWND hWndNetInfo[7];
@@ -61,16 +52,7 @@ void CMainDialog::OnCommand(HWND hWnd, int id, HWND hwndCtl, UINT codeNotify) {
 		hWndNetInfo[6] = GetDlgItem(hWnd, IDC_IP_BROADCAST);
 
 		for (int i(0); i < 7; i++)
-			::SendMessage(
-				hWndNetInfo[i],
-				IPM_SETADDRESS, 0L,
-				MAKEIPADDRESS(
-					(BYTE)netInfo[i].octet_get(0),
-					(BYTE)netInfo[i].octet_get(1),
-					(BYTE)netInfo[i].octet_get(2),
-					(BYTE)netInfo[i].octet_get(3)
-					)
-				);
+			::SendMessage(hWndNetInfo[i], IPM_SETADDRESS, 0L, netInfo[i].Get());
 		break;
 	}
 	}

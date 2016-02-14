@@ -1,53 +1,43 @@
 #pragma once
 #include "IPv4.h"
 
-typedef uint_fast32_t ui32;
 
 class CSubnet {
-	//  netinfo_:
-	//      ...[0] - IP Address
-	//      ...[1] - Network Mask
-	//      ...[2] - Wildcard
-	//      ...[3] - Network
-	//      ...[4] - HostMin
-	//      ...[5] - HostMax
-	//      ...[6] - Broadcast
-	std::vector<CIPv4>
-		netinfo_;
 
-	//  bitmask_ max = 32
-	ui8	bitmask_ = 0;
+	CIPv4
+		address_,
+		netmask_,
+		wildcard_,
+		network_,
+		hostmin_,
+		hostmax_,
+		broadcast_;
 
-	//  hosts_ max = unsigned int
-	ui32 hosts_ = 0;
+	static const ui32 bitLimiter32 = 0xffffffff;  // 32 bit max
 
-	//  == Temporary methods solution  =====
-	///  == Temp fields =====================
-	const int oct_count_ = 4;
-	const int support_size_ = 9;
-	std::vector<short> support_arr;
-
-	///  == Transferred from the old func. ==
 	void
-		fill_support_arr(),
-		calculate_netmask(),
-		calculate_wildcard(),
-		calculate_network(),
-		calculate_hostmin(),
-		calculate_hostmax(),
-		calculate_broadcast(),
-		calculate_hosts();
-	///  ====================================
+		CalculateWildcard(),
+		CalculateNetwork(),
+		CalculateHostMin(),
+		CalculateHostMax(),
+		CalculateBroadcast();
 
 public:
 
-	void calculate();
+	void
+		SetIp(const ui64 & ip),
+		SetIp(
+			const ui64 & oct0,
+			const ui64 & oct1,
+			const ui64 & oct2,
+			const ui64 & oct3
+			),
+		SetNetMask(const ui64 & maskBin),
+		SetBitMask(const ui_8 & maskDec);
 
-	const size_t & size() const;
+	void Calculate();
 
-	CIPv4 & operator[](const int &ndx);
-	ui8 & bitmask();
-	ui32 & hosts();	
+	CIPv4 & operator [] (const ui64 & ndx);
 
 	CSubnet();
 	~CSubnet();

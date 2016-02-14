@@ -1,39 +1,60 @@
 #pragma once
 #include <cstdint>
-#include <vector>
 #include <ostream>
-#include <iostream>
 
-typedef uint_fast8_t ui8;
-
+typedef uint_fast8_t ui_8;
+typedef uint_fast32_t ui32;
+typedef uint_fast64_t ui64;
 
 class CIPv4 {
 private:
-	//  ip_:
-	//  ...[0] - octet 1
-	//  ...[1] - octet 2
-	//  ...[2] - octet 3
-	//  ...[3] - octet 4
-	std::vector<ui8>
-		ip_;
+
+	ui32 ip_ = 0;
+
+	static const ui_8 bitLimiter_8 = 0xff;        //  8 bit max
+	static const ui32 bitLimiter32 = 0xffffffff;  // 32 bit max
 
 public:
-	const size_t & size() const;
 
-	const ui8 & octet_get(const ui8 & ndx) const;
-	void octet_set(const ui8 & ndx, const ui8 & val);
+//   getters \ setters -   -   -   -   -   -   -   -   -   -   -   -   -
 
-	ui8 & operator[](const int &ndx);
+	ui_8 GetOctet(const ui_8 & ndx) const;
+	void SetOctet(const ui_8 & ndx, const ui64 & val);
 
-	void operator()(
-		const ui8 & oct1,
-		const ui8 & oct2,
-		const ui8 & oct3,
-		const ui8 & oct4
+	const ui32 & Get() const;
+	void Set(const ui64 & ip);
+
+//   c-tors \ d-tors   -   -   -   -   -   -   -   -   -   -   -   -   -
+
+	CIPv4(const CIPv4 & obj);
+
+	CIPv4(
+		const ui64 & oct0,
+		const ui64 & oct1,
+		const ui64 & oct2,
+		const ui64 & oct3
 		);
+
+	CIPv4(const ui64 & val);
 
 	CIPv4();
 	~CIPv4();
+
+//   operators -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
+
+	CIPv4 & operator = (const CIPv4 & obj);
+	CIPv4 operator + (const CIPv4 & obj) const;
+	CIPv4 operator - (const CIPv4 & obj) const;
+	CIPv4 operator & (const CIPv4 & obj) const;
+	CIPv4 operator | (const CIPv4 & obj) const;
+	CIPv4 operator ~ () const;
+
+	void operator()(
+		const ui64 & oct0,
+		const ui64 & oct1,
+		const ui64 & oct2,
+		const ui64 & oct3
+		);
 };
 
 std::wostream & operator<<(std::wostream & wos, const CIPv4 & obj);
