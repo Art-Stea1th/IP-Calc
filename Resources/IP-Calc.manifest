@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
 <assemblyIdentity
-    version="2.0.2.0"
+    version="2.1.0.0"
     processorArchitecture="*"
-    name="Art-Stea1th_Design_and_Development.IP-Calculator"
+    name="Art-Stea1th_Design_and_Development.IPv4-Calculator"
     type="win32"
 />
-<description>Calculator IPv4, Mask, first-last IP, Broadcast, etc.</description>
+<description>Classless Inter-Domain Routing Calculator</description>
 <dependency>
     <dependentAssembly>
         <assemblyIdentity
