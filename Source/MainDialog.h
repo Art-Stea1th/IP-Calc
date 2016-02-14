@@ -1,6 +1,7 @@
 #pragma once
 #include "Dlg.h"
 
+
 class CMainDialog : public CDlg {
 private:
 
