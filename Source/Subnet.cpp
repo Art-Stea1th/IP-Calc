@@ -24,10 +24,6 @@ void CSubnet::SetIp(const ui64 & ip) {
 	address_ = ip;
 }
 
-void CSubnet::SetNetMask(const ui64 & maskBin) {
-	netmask_ = maskBin;
-}
-
 void CSubnet::SetIp(
 	const ui64 & oct0,
 	const ui64 & oct1,
@@ -37,10 +33,14 @@ void CSubnet::SetIp(
 	address_(oct0, oct1, oct2, oct3);
 }
 
-void CSubnet::SetBitMask(const ui_8 & maskDec) {
-	maskDec ?
+void CSubnet::SetNetMask(const ui64 & netmask) {
+	netmask_ = netmask;
+}
+
+void CSubnet::SetBitMask(const ui_8 & bitmask) {
+	bitmask ?
 		netmask_ = bitLimiter32 << (
-			32 - (maskDec <= 32 ? maskDec : 0)
+			32 - (bitmask <= 32 ? bitmask : 0)
 			) :
 		netmask_ = 0;
 }
@@ -52,6 +52,13 @@ void CSubnet::Calculate() {
 	CalculateHostMax(),
 	CalculateBroadcast();
 }
+
+//   c-tors \ d-tors   -   -   -   -   -   -   -   -   -   -   -   -   -
+
+CSubnet::CSubnet() {}
+CSubnet::~CSubnet() {}
+
+//   operators -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
 
 CIPv4 & CSubnet::operator [] (const ui64 & ndx) {
 	switch (ndx) {
@@ -65,6 +72,3 @@ CIPv4 & CSubnet::operator [] (const ui64 & ndx) {
 	default: return CIPv4(0);
 	}
 }
-
-CSubnet::CSubnet() {}
-CSubnet::~CSubnet() {}

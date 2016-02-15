@@ -1,6 +1,5 @@
 #include "IPv4.h"
 
-
 //   getters \ setters -   -   -   -   -   -   -   -   -   -   -   -   -
 
 ui_8 CIPv4::GetOctet(const ui_8 & ndx) const {
@@ -94,7 +93,7 @@ void CIPv4::operator()(
 	SetOctet(3, oct3);
 }
 
-std::wostream & operator<<(std::wostream & wos, const CIPv4 & obj) {
+std::wostream & operator << (std::wostream & wos, const CIPv4 & obj) {
 	return wos
 		<< obj.GetOctet(0) << L'.'
 		<< obj.GetOctet(1) << L'.'

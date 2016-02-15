@@ -2,7 +2,7 @@
 #include "Dlg.h"
 
 
-class CMainDialog : public CDlg {
+class CMainDialog : public IDlg {
 private:
 
 	explicit CMainDialog();

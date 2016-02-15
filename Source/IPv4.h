@@ -57,4 +57,4 @@ public:
 		);
 };
 
-std::wostream & operator<<(std::wostream & wos, const CIPv4 & obj);
+std::wostream & operator << (std::wostream & wos, const CIPv4 & obj);

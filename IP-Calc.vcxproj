@@ -120,10 +120,10 @@
     <ResourceCompile Include="resources\Resource.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Manifest Include="Resources\IP-Calc.manifest" />
+    <Image Include="Resources\IP-Calc.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resources\IP-Calc.ico" />
+    <Manifest Include="Resources\IP-Calc.manifest" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

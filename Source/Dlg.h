@@ -6,7 +6,7 @@
 
 #include "..\Resources\Resource.h"
 
-class CDlg {
+class IDlg {
 private:
 
 	HINSTANCE hInstance_    = nullptr;
@@ -14,7 +14,7 @@ private:
 	HWND      hWndParent_   = nullptr;
 	DLGPROC   lpDialogFunc_ = nullptr;
 
-	explicit CDlg();
+	explicit IDlg();
 
 protected:
 
@@ -26,13 +26,13 @@ public:
 
 	virtual BOOL Run() final;
 
-	CDlg(WORD wIntDlgId);
-	CDlg(WORD wIntDlgId, HINSTANCE hInstance);
-	CDlg(WORD wIntDlgId, HINSTANCE hInstance, HWND hWndParent);
-	virtual ~CDlg();
+	IDlg(WORD wIntDlgId);
+	IDlg(WORD wIntDlgId, HINSTANCE hInstance);
+	IDlg(WORD wIntDlgId, HINSTANCE hInstance, HWND hWndParent);
+	virtual ~IDlg();
 
 
-	static CDlg* pDlg;
+	static IDlg* pDlg;
 	static BOOL CALLBACK lpDlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 };

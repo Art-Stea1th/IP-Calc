@@ -7,7 +7,7 @@
 BOOL CMainDialog::OnInitDialog(HWND hWnd, HWND hwndFocus, LPARAM lParam) {
 
 	HICON hIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_IP_CALC));
-	SendMessage(hWnd, WM_SETICON, ICON_SMALL, (LPARAM)hIcon);
+	::SendMessage(hWnd, WM_SETICON, ICON_SMALL, (LPARAM)hIcon);
 
 	HWND hWndComboBox = GetDlgItem(hWnd, IDC_COMBO_BITMASK);
 	for (int i(0); i < 33; i++) {
@@ -43,17 +43,21 @@ void CMainDialog::OnCommand(HWND hWnd, int id, HWND hwndCtl, UINT codeNotify) {
 
 
 		HWND hWndNetInfo[7];
-		hWndNetInfo[0] = GetDlgItem(hWnd, IDC_IP_IP_ADDRESS);
-		hWndNetInfo[1] = GetDlgItem(hWnd, IDC_IP_NETW_MASK);
-		hWndNetInfo[2] = GetDlgItem(hWnd, IDC_IP_WILDCARD);
-		hWndNetInfo[3] = GetDlgItem(hWnd, IDC_IP_NETWORK);
-		hWndNetInfo[4] = GetDlgItem(hWnd, IDC_IP_HOSTMIN);
-		hWndNetInfo[5] = GetDlgItem(hWnd, IDC_IP_HOSTMAX);
-		hWndNetInfo[6] = GetDlgItem(hWnd, IDC_IP_BROADCAST);
 
-		for (int i(0); i < 7; i++)
+		for (int i(0); i < 7; i++) {
+			hWndNetInfo[i] = GetDlgItem(hWnd, i + IDC_IP_ADDRESS);
 			::SendMessage(hWndNetInfo[i], IPM_SETADDRESS, 0L, netInfo[i].Get());
+		}
+
 		break;
+	}
+	case IDC_IP_IP_ADDRESS_IN:
+	{
+		
+	}
+	case IDC_COMBO_BITMASK:
+	{
+		
 	}
 	}
 }
@@ -65,12 +69,12 @@ void CMainDialog::OnClose(HWND hWnd) {
 // --- public: --- --- --- ---
 
 CMainDialog::CMainDialog(WORD wIntDlgId)
-	: CDlg(wIntDlgId) {}
+	: IDlg(wIntDlgId) {}
 
 CMainDialog::CMainDialog(WORD wIntDlgId, HINSTANCE hInstance)
-	: CDlg(wIntDlgId, hInstance) {}
+	: IDlg(wIntDlgId, hInstance) {}
 
 CMainDialog::CMainDialog(WORD wIntDlgId, HINSTANCE hInstance, HWND hWndParent)
-	: CDlg(wIntDlgId, hInstance, hWndParent) {}
+	: IDlg(wIntDlgId, hInstance, hWndParent) {}
 
 CMainDialog::~CMainDialog() {}

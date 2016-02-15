@@ -2,27 +2,27 @@
 
 // --- public: --- --- --- ---
 
-BOOL CDlg::Run() {
+BOOL IDlg::Run() {
 	return DialogBox(hInstance_, lpTemplate_, hWndParent_, lpDialogFunc_);
 }
 
-CDlg::CDlg(WORD wIntDlgId) {
+IDlg::IDlg(WORD wIntDlgId) {
 	pDlg          = this;
 	lpTemplate_   = MAKEINTRESOURCE(wIntDlgId);
 	lpDialogFunc_ = lpDlgProc;
 }
 
-CDlg::CDlg(WORD wIntDlgId, HINSTANCE hInstance)
-	: CDlg(wIntDlgId) {
+IDlg::IDlg(WORD wIntDlgId, HINSTANCE hInstance)
+	: IDlg(wIntDlgId) {
 	hInstance_    = hInstance;
 }
 
-CDlg::CDlg(WORD wIntDlgId, HINSTANCE hInstance, HWND hWndParent)
-	: CDlg(wIntDlgId, hInstance) {
+IDlg::IDlg(WORD wIntDlgId, HINSTANCE hInstance, HWND hWndParent)
+	: IDlg(wIntDlgId, hInstance) {
 	hWndParent_   = hWndParent;
 }
 
-CDlg::~CDlg() {
+IDlg::~IDlg() {
 	lpDialogFunc_ = nullptr;
 	hWndParent_   = nullptr;
 	lpTemplate_   = nullptr;
@@ -32,9 +32,9 @@ CDlg::~CDlg() {
 
 // --- static: --- --- --- ---
 
-CDlg* CDlg::pDlg = nullptr;
+IDlg* IDlg::pDlg = nullptr;
 
-BOOL CALLBACK CDlg::lpDlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+BOOL CALLBACK IDlg::lpDlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 	switch (message) {
 		HANDLE_MSG(hWnd, WM_INITDIALOG, pDlg->OnInitDialog);
 		HANDLE_MSG(hWnd, WM_COMMAND, pDlg->OnCommand);
