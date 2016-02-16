@@ -6,6 +6,8 @@
 
 #include "..\Resources\Resource.h"
 
+#include <map>
+
 class IDlg {
 private:
 
@@ -32,7 +34,7 @@ public:
 	virtual ~IDlg();
 
 
-	static IDlg* pDlg;
+	static IDlg * pDlg;
 	static BOOL CALLBACK lpDlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 };
