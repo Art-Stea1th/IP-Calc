@@ -20,8 +20,6 @@ private:
 
 public:	
 
-	CMainDialog(WORD wIntDlgId);
-	CMainDialog(WORD wIntDlgId, HINSTANCE hInstance);
-	CMainDialog(WORD wIntDlgId, HINSTANCE hInstance, HWND hWndParent);
+	CMainDialog(WORD wIntDlgId, HWND hWndParent);
 	~CMainDialog();
 };

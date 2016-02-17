@@ -11,9 +11,7 @@ private:
 
 public:
 
-	CAboutDialog(WORD wIntDlgId);
-	CAboutDialog(WORD wIntDlgId, HINSTANCE hInstance);
-	CAboutDialog(WORD wIntDlgId, HINSTANCE hInstance, HWND hWndParent);
+	CAboutDialog(WORD wIntDlgId, HWND hWndParent);
 	~CAboutDialog();
 };
 

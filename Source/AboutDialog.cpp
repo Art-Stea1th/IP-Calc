@@ -19,16 +19,7 @@ void CAboutDialog::OnClose(HWND hWnd) {
 
 // --- public: --- --- --- ---
 
-CAboutDialog::CAboutDialog(WORD wIntDlgId)
-	: IDlg(wIntDlgId) {
+CAboutDialog::CAboutDialog(WORD wIntDlgId, HWND hWndParent)
+	: IDlg(wIntDlgId, hWndParent) {
 }
-
-CAboutDialog::CAboutDialog(WORD wIntDlgId, HINSTANCE hInstance)
-	: IDlg(wIntDlgId, hInstance) {
-}
-
-CAboutDialog::CAboutDialog(WORD wIntDlgId, HINSTANCE hInstance, HWND hWndParent)
-	: IDlg(wIntDlgId, hInstance, hWndParent) {
-}
-
 CAboutDialog::~CAboutDialog() {}
