@@ -5,7 +5,7 @@
 
 int APIENTRY _tWinMain(HINSTANCE This, HINSTANCE Prev, LPTSTR cmd, int mode) {
 	
-	HWND window;
+	//HWND window;
 
 	CMainDialog mainDlg(IDD_MAIN, nullptr);
 	mainDlg.Run();
