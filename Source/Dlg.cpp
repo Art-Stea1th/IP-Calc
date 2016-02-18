@@ -3,10 +3,6 @@
 // --- public: --- --- --- ---
 
 BOOL IDlg::Run() {
-	//DialogParam* dlgParam;
-	//CreateDialogParam(hInstance_, lpTemplateName_, hWndParent_, lpDialogProc_, (LPARAM)this);
-	//DialogBoxParam(hInstance_, lpTemplateName_, hWndParent_, lpDialogProc_, (LPARAM)this);
-	//CreateDialog(hInstance_, lpTemplateName_, hWndParent_, lpDialogProc_);
 	DialogBox(hInstance_, lpTemplateName_, hWndParent_, lpDialogProc_);
 	return NULL;
 }
@@ -46,9 +42,11 @@ BOOL IDlg::lpDlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 		for (it = dlgList.begin(); it != dlgList.end(); it++)
 			if (it->first)
 				if (!it->second) {
-					it->second = hWnd;
+					it->first->hWndThis_ = hWnd;
+					it->second = hWnd;					
 					break;
 				}
+
 		it = dlgList.begin();
 
 		if (it->second != hWnd) {
@@ -62,6 +60,5 @@ BOOL IDlg::lpDlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 		HANDLE_MSG(hWnd, WM_COMMAND, it->first->OnCommand);
 		HANDLE_MSG(hWnd, WM_CLOSE, it->first->OnClose);
 	}
-
 	return FALSE;
 }

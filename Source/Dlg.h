@@ -20,7 +20,7 @@ private:
 
 protected:
 	
-	//HWND      hWndThis_ = nullptr;
+	HWND      hWndThis_ = nullptr;
 
 	virtual BOOL OnInitDialog(HWND hWnd, HWND hwndFocus, LPARAM lParam) = 0;
 	virtual void OnCommand(HWND hWnd, int id, HWND hwndCtl, UINT codeNotify) = 0;
