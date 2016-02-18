@@ -24,6 +24,10 @@ IDlg::IDlg(WORD wIntDlgId, HWND hWndParent) {
 }
 
 IDlg::~IDlg() {
+	std::map<IDlg*, HWND>::iterator it;
+	it = dlgList.find(this);
+	dlgList.erase(it);
+
 	lpDialogProc_   = nullptr;
 	hWndParent_     = nullptr;
 	lpTemplateName_ = nullptr;
@@ -34,7 +38,7 @@ IDlg::~IDlg() {
 
 BOOL IDlg::lpDlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
-	static std::map<IDlg*, HWND>::iterator it;
+	std::map<IDlg*, HWND>::iterator it;
 
 	// It will be replaced with a message map
 	if (uMsg == WM_INITDIALOG || uMsg == WM_COMMAND || uMsg == WM_CLOSE) {
