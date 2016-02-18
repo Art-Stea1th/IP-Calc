@@ -10,17 +10,18 @@
 
 class IDlg {
 private:
+	explicit IDlg();
 
 	HINSTANCE hInstance_ = nullptr;
 	LPCTSTR   lpTemplateName_ = nullptr;	
 	HWND      hWndParent_ = nullptr;
 	DLGPROC   lpDialogProc_ = nullptr;
 
-	explicit IDlg();
+	HWND      hWndThis_ = nullptr;
 
 protected:
-	
-	HWND      hWndThis_ = nullptr;
+
+	HWND GetHWndThis();
 
 	virtual BOOL OnInitDialog(HWND hWnd, HWND hwndFocus, LPARAM lParam) = 0;
 	virtual void OnCommand(HWND hWnd, int id, HWND hwndCtl, UINT codeNotify) = 0;
@@ -29,10 +30,13 @@ protected:
 public:
 
 	BOOL Run();
-
+	
 	IDlg(WORD wIntDlgId, HWND hWndParent);
+	IDlg(WORD wIntDlgId);
+
 	virtual ~IDlg();
 
 	static BOOL CALLBACK lpDlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 };
+
 static std::map<IDlg*, HWND> dlgList;

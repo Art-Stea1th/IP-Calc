@@ -1,5 +1,11 @@
 #include "Dlg.h"
 
+// --- protected:  --- --- ---
+
+HWND IDlg::GetHWndThis() {
+	return hWndThis_;
+}
+
 // --- public: --- --- --- ---
 
 BOOL IDlg::Run() {
@@ -17,6 +23,10 @@ IDlg::IDlg(WORD wIntDlgId, HWND hWndParent) {
 	p.first = this;
 	p.second = nullptr;
 	dlgList.insert(p);
+}
+
+IDlg::IDlg(WORD wIntDlgId)
+	: IDlg(wIntDlgId, nullptr) {
 }
 
 IDlg::~IDlg() {

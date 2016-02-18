@@ -22,4 +22,7 @@ void CAboutDialog::OnClose(HWND hWnd) {
 CAboutDialog::CAboutDialog(WORD wIntDlgId, HWND hWndParent)
 	: IDlg(wIntDlgId, hWndParent) {
 }
+CAboutDialog::CAboutDialog(WORD wIntDlgId)
+	: IDlg(wIntDlgId) {
+}
 CAboutDialog::~CAboutDialog() {}

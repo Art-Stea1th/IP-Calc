@@ -38,7 +38,7 @@ void CMainDialog::OnCommand(HWND hWnd, int id, HWND hwndCtl, UINT codeNotify) {
 
 	case IDC_BUTTON_TEST:
 	{
-		CAboutDialog aboutDlg(IDD_ABOUT, nullptr);
+		CAboutDialog aboutDlg(IDD_ABOUT, GetHWndThis());
 		aboutDlg.Run();
 	}
 	}
@@ -66,5 +66,8 @@ void CMainDialog::OnClose(HWND hWnd) {
 
 CMainDialog::CMainDialog(WORD wIntDlgId, HWND hWndParent)
 	: IDlg(wIntDlgId, hWndParent) {}
+
+CMainDialog::CMainDialog(WORD wIntDlgId)
+	: IDlg(wIntDlgId) {}
 
 CMainDialog::~CMainDialog() {}

@@ -12,5 +12,6 @@ private:
 public:
 
 	CAboutDialog(WORD wIntDlgId, HWND hWndParent);
+	CAboutDialog(WORD wIntDlgId);
 	~CAboutDialog();
 };

@@ -21,5 +21,6 @@ private:
 public:	
 
 	CMainDialog(WORD wIntDlgId, HWND hWndParent);
+	CMainDialog(WORD wIntDlgId);
 	~CMainDialog();
 };
