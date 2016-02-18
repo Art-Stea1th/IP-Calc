@@ -1,4 +1,4 @@
-# IP-Calculator
+# IPv4-Calculator
 ### Classless Inter-Domain Routing
 :grey_exclamation: In order to avoid errors in the assembly, select the x86 platform & use UNICODE character set.
 ######:ghost: [releases](https://github.com/Art-Stea1th/IP-Calc/releases)

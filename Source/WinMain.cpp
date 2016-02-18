@@ -3,7 +3,7 @@
 
 #include "WinMain.h"
 
-int APIENTRY _tWinMain(HINSTANCE This, HINSTANCE Prev, LPTSTR cmd, int mode) {
+INT APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, INT nCmdShow) {
 
 	CMainDialog mainDlg(IDD_MAIN);
 	mainDlg.Run();

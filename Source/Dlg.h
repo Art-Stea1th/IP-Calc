@@ -9,8 +9,7 @@
 #include <map>
 
 class IDlg {
-private:
-	explicit IDlg();
+private:	
 
 	HINSTANCE hInstance_ = nullptr;
 	LPCTSTR   lpTemplateName_ = nullptr;	
@@ -19,24 +18,27 @@ private:
 
 	HWND      hWndThis_ = nullptr;
 
+private:
+
+	explicit IDlg();
+
 protected:
 
 	HWND GetHWndThis();
 
 	virtual BOOL OnInitDialog(HWND hWnd, HWND hwndFocus, LPARAM lParam) = 0;
-	virtual void OnCommand(HWND hWnd, int id, HWND hwndCtl, UINT codeNotify) = 0;
-	virtual void OnClose(HWND hWnd) = 0;	
+	virtual VOID OnCommand(HWND hWnd, INT id, HWND hwndCtl, UINT codeNotify) = 0;
+	virtual VOID OnClose(HWND hWnd) = 0;
+	
+	static BOOL CALLBACK lpStaticDlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 public:
 
-	BOOL Run();
+	VOID Run() const;
 	
 	IDlg(WORD wIntDlgId, HWND hWndParent);
 	IDlg(WORD wIntDlgId);
-
-	virtual ~IDlg();
-
-	static BOOL CALLBACK lpDlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	virtual ~IDlg();	
 };
 
 static std::map<IDlg*, HWND> dlgList;

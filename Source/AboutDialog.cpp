@@ -10,10 +10,10 @@ BOOL CAboutDialog::OnInitDialog(HWND hWnd, HWND hwndFocus, LPARAM lParam) {
 	return FALSE;
 }
 
-void CAboutDialog::OnCommand(HWND hWnd, int id, HWND hwndCtl, UINT codeNotify) {
+VOID CAboutDialog::OnCommand(HWND hWnd, INT id, HWND hwndCtl, UINT codeNotify) {
 }
 
-void CAboutDialog::OnClose(HWND hWnd) {
+VOID CAboutDialog::OnClose(HWND hWnd) {
 	EndDialog(hWnd, NULL);
 }
 

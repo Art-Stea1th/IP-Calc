@@ -25,16 +25,15 @@ BOOL CMainDialog::OnInitDialog(HWND hWnd, HWND hwndFocus, LPARAM lParam) {
 	return FALSE;
 }
 
-void CMainDialog::OnCommand(HWND hWnd, int id, HWND hwndCtl, UINT codeNotify) {
+VOID CMainDialog::OnCommand(HWND hWnd, INT id, HWND hwndCtl, UINT codeNotify) {
 	switch (LOWORD(id)) {
 	case IDC_IP_ADDRESS:    OnChange(); break;
 	case IDC_COMBO_BITMASK: OnChange(); break;
 	case IDC_BUTTON_RESET:
 		::SendMessage(hWndIpAddrControl_[0], IPM_SETADDRESS, (WPARAM)0, (LPARAM)0);
-		::SendMessage(hWndComboBitmask_, CB_SETCURSEL, (WPARAM)0, (LPARAM)0);
+		::SendMessage(hWndComboBitmask_,     CB_SETCURSEL,   (WPARAM)0, (LPARAM)0);
 		OnChange();
 		break;
-
 
 	case IDC_BUTTON_TEST:
 	{
@@ -44,9 +43,9 @@ void CMainDialog::OnCommand(HWND hWnd, int id, HWND hwndCtl, UINT codeNotify) {
 	}
 }
 
-void CMainDialog::OnChange() {
+VOID CMainDialog::OnChange() {
 
-	::SendMessage(hWndIpAddrControl_[0], IPM_GETADDRESS, 0L, (LPARAM)&netInfo_[0]);
+	::SendMessage(hWndIpAddrControl_[0], IPM_GETADDRESS, (WPARAM)0, (LPARAM)&netInfo_[0]);
 
 	_TCHAR dwBitmaskBuffer[3];
 	::GetWindowText(hWndComboBitmask_, (LPWSTR)dwBitmaskBuffer, 3);
@@ -55,10 +54,10 @@ void CMainDialog::OnChange() {
 	netInfo_.Calculate();
 
 	for (int i(1); i < 7; i++)
-		::SendMessage(hWndIpAddrControl_[i], IPM_SETADDRESS, 0L, netInfo_[i].Get());
+		::SendMessage(hWndIpAddrControl_[i], IPM_SETADDRESS, (WPARAM)0, netInfo_[i].Get());
 }
 
-void CMainDialog::OnClose(HWND hWnd) {
+VOID CMainDialog::OnClose(HWND hWnd) {
 	EndDialog(hWnd, NULL);
 }
 
