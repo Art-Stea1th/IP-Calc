@@ -14,4 +14,3 @@ public:
 	CAboutDialog(WORD wIntDlgId, HWND hWndParent);
 	~CAboutDialog();
 };
-

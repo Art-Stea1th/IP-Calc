@@ -38,7 +38,7 @@ void CMainDialog::OnCommand(HWND hWnd, int id, HWND hwndCtl, UINT codeNotify) {
 
 	case IDC_BUTTON_TEST:
 	{
-		CAboutDialog aboutDlg(IDD_ABOUT, hWndThis_);
+		CAboutDialog aboutDlg(IDD_ABOUT, nullptr);
 		aboutDlg.Run();
 	}
 	}

@@ -45,6 +45,8 @@ BOOL IDlg::lpDlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 					it->second = hWnd;
 					break;
 				}
+		it = dlgList.begin();
+
 		if (it->second != hWnd) {
 			it = dlgList.begin();
 			while (it->second != hWnd) it++;
