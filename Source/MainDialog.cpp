@@ -74,6 +74,8 @@ BOOL CMainDialog::OnInitDialog(HWND hWnd, HWND hwndFocus, LPARAM lParam) {
 
 	HICON hIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_MAIN));
 	::SendMessage(hWnd, WM_SETICON, ICON_SMALL, (LPARAM)hIcon);
+	
+	::SetWindowText(hWnd, FMakeIntResourceStr(GetThisHandle(), IDS_MAIN_DIALOD_CAPTION, 64));
 
 	InitControls(hWnd);
 
@@ -94,10 +96,10 @@ VOID CMainDialog::OnClose(HWND hWnd) {
 
 // --- public: --- --- --- ---
 
-CMainDialog::CMainDialog(WORD wDialogId, HWND hWndParent)
+CMainDialog::CMainDialog(const WORD &wDialogId, const HWND &hWndParent)
 	: IDialogManager(wDialogId, hWndParent) {}
 
-CMainDialog::CMainDialog(WORD wDialogId)
+CMainDialog::CMainDialog(const WORD &wDialogId)
 	: IDialogManager(wDialogId) {}
 
 CMainDialog::~CMainDialog() {}

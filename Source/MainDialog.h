@@ -1,7 +1,8 @@
 #pragma once
 
-#include "DialogManager.h"
 #include "Subnet.h"
+#include "DialogManager.h"
+#include "MakeIntResourceStr.h"
 
 class CMainDialog : public IDialogManager {
 private:
@@ -12,8 +13,6 @@ private:
 	HWND hWndComboBitmask_;
 
 private:
-
-	explicit CMainDialog();
 
 	virtual VOID RePaint() final;
 
@@ -27,13 +26,13 @@ private:
 
 private:
 
-	virtual BOOL OnInitDialog(HWND hWnd, HWND hwndFocus, LPARAM lParam) final;
-	virtual VOID OnCommand(HWND hWnd, INT id, HWND hwndCtl, UINT codeNotify) final;
-	virtual VOID OnClose(HWND hWnd) final;
+	virtual BOOL OnInitDialog(HWND hWnd, HWND hwndFocus, LPARAM lParam)      override final;
+	virtual VOID OnCommand(HWND hWnd, INT id, HWND hwndCtl, UINT codeNotify) override final;
+	virtual VOID OnClose(HWND hWnd)                                          override final;
 
 public:	
 
-	CMainDialog(WORD wDialogId, HWND hWndParent);
-	CMainDialog(WORD wDialogId);
+	CMainDialog(const WORD &wDialogId, const HWND &hWndParent);
+	CMainDialog(const WORD &wDialogId);
 	~CMainDialog();
 };
