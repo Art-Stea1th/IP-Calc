@@ -22,15 +22,15 @@ class CSubnet {
 
 public:
 
-	void SetIp(const ui64 & ip);
+	void SetIp(const ui64 &ip);
 	void	SetIp(
-		const ui64 & oct0,
-		const ui64 & oct1,
-		const ui64 & oct2,
-		const ui64 & oct3
+		const ui64 &oct0,
+		const ui64 &oct1,
+		const ui64 &oct2,
+		const ui64 &oct3
 		);
-	void	SetNetMask(const ui64 & netmask);
-	void	SetBitMask(const ui_8 & bitmask);
+	void	SetNetMask(const ui64 &netmask);
+	void	SetBitMask(const ui_8 &bitmask);
 
 	void Calculate();
 
@@ -41,6 +41,6 @@ public:
 
 //   operators -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
 
-	CIPv4 & operator [] (const ui64 & ndx);
+	CIPv4 & operator [] (const ui64 &ndx);
 	
 };

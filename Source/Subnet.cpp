@@ -25,19 +25,19 @@ void CSubnet::SetIp(const ui64 & ip) {
 }
 
 void CSubnet::SetIp(
-	const ui64 & oct0,
-	const ui64 & oct1,
-	const ui64 & oct2,
-	const ui64 & oct3
+	const ui64 &oct0,
+	const ui64 &oct1,
+	const ui64 &oct2,
+	const ui64 &oct3
 	) {
 	address_(oct0, oct1, oct2, oct3);
 }
 
-void CSubnet::SetNetMask(const ui64 & netmask) {
+void CSubnet::SetNetMask(const ui64 &netmask) {
 	netmask_ = netmask;
 }
 
-void CSubnet::SetBitMask(const ui_8 & bitmask) {
+void CSubnet::SetBitMask(const ui_8 &bitmask) {
 	bitmask ?
 		netmask_ = bitLimiter32 << (
 			32 - (bitmask <= 32 ? bitmask : 0)
@@ -60,7 +60,7 @@ CSubnet::~CSubnet() {}
 
 //   operators -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
 
-CIPv4 & CSubnet::operator [] (const ui64 & ndx) {
+CIPv4 & CSubnet::operator [] (const ui64 &ndx) {
 	switch (ndx) {
 	case 0: return address_;
 	case 1: return netmask_;

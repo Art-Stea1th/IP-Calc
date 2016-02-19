@@ -18,43 +18,43 @@ public:
 
 //   getters \ setters -   -   -   -   -   -   -   -   -   -   -   -   -
 
-	ui_8 GetOctet(const ui_8 & ndx) const;
-	void SetOctet(const ui_8 & ndx, const ui64 & val);
+	ui_8 GetOctet(const ui_8 &ndx) const;
+	void SetOctet(const ui_8 &ndx, const ui64 &val);
 
-	const ui32 & Get() const;
-	void Set(const ui64 & ip);
+	const ui32 &Get() const;
+	void Set(const ui64 &ip);
 
 //   c-tors \ d-tors   -   -   -   -   -   -   -   -   -   -   -   -   -
 
-	CIPv4(const CIPv4 & obj);
+	CIPv4(const CIPv4 &obj);
 
 	CIPv4(
-		const ui64 & oct0,
-		const ui64 & oct1,
-		const ui64 & oct2,
-		const ui64 & oct3
+		const ui64 &oct0,
+		const ui64 &oct1,
+		const ui64 &oct2,
+		const ui64 &oct3
 		);
 
-	CIPv4(const ui64 & val);
+	CIPv4(const ui64 &val);
 
 	CIPv4();
 	~CIPv4();
 
 //   operators -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
 
-	CIPv4 & operator = (const CIPv4 & obj);
-	CIPv4 operator + (const CIPv4 & obj) const;
-	CIPv4 operator - (const CIPv4 & obj) const;
-	CIPv4 operator & (const CIPv4 & obj) const;
-	CIPv4 operator | (const CIPv4 & obj) const;
+	CIPv4 &operator = (const CIPv4 &obj);
+	CIPv4 operator + (const CIPv4 &obj) const;
+	CIPv4 operator - (const CIPv4 &obj) const;
+	CIPv4 operator & (const CIPv4 &obj) const;
+	CIPv4 operator | (const CIPv4 &obj) const;
 	CIPv4 operator ~ () const;
 
 	void operator()(
-		const ui64 & oct0,
-		const ui64 & oct1,
-		const ui64 & oct2,
-		const ui64 & oct3
+		const ui64 &oct0,
+		const ui64 &oct1,
+		const ui64 &oct2,
+		const ui64 &oct3
 		);
 };
 
-std::wostream & operator << (std::wostream & wos, const CIPv4 & obj);
+std::wostream &operator << (std::wostream &wos, const CIPv4 &obj);
