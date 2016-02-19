@@ -1,6 +1,5 @@
 #pragma once
-#include <cstdint>
-#include <ostream>
+#include "HeadersCpp.h"
 
 typedef uint_fast8_t ui_8;
 typedef uint_fast32_t ui32;

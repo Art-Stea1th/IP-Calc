@@ -33,15 +33,15 @@
     <ClCompile Include="source\DialogManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ControlsManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resources\Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\MainDialog.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\WinMain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\IPv4.h">
@@ -54,6 +54,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\DialogManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ControlsManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\HeadersWin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\HeadersCpp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

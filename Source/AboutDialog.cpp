@@ -19,10 +19,10 @@ VOID CAboutDialog::OnClose(HWND hWnd) {
 
 // --- public: --- --- --- ---
 
-CAboutDialog::CAboutDialog(WORD wIntDlgId, HWND hWndParent)
-	: IDialogManager(wIntDlgId, hWndParent) {
+CAboutDialog::CAboutDialog(WORD wDialogId, HWND hWndParent)
+	: IDialogManager(wDialogId, hWndParent) {
 }
-CAboutDialog::CAboutDialog(WORD wIntDlgId)
-	: IDialogManager(wIntDlgId) {
+CAboutDialog::CAboutDialog(WORD wDialogId)
+	: IDialogManager(wDialogId) {
 }
 CAboutDialog::~CAboutDialog() {}

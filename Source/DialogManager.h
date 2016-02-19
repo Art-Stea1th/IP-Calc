@@ -1,12 +1,8 @@
 #pragma once
-#include <tchar.h>
-#include <windows.h>
-#include <windowsx.h>
-#include <commctrl.h>
 
+#include "HeadersCpp.h"
+#include "HeadersWin.h"
 #include "..\Resources\Resource.h"
-
-#include <map>
 
 class IDialogManager {
 private:	
@@ -24,7 +20,7 @@ private:
 
 protected:
 
-	HWND GetHWndThis();
+	HWND GetHWndThis() const;
 
 	virtual BOOL OnInitDialog(HWND hWnd, HWND hwndFocus, LPARAM lParam) = 0;
 	virtual VOID OnCommand(HWND hWnd, INT id, HWND hwndCtl, UINT codeNotify) = 0;
@@ -36,8 +32,8 @@ public:
 
 	VOID Run() const;
 	
-	IDialogManager(WORD wIntDlgId, HWND hWndParent);
-	IDialogManager(WORD wIntDlgId);
+	IDialogManager(WORD wDialogId, HWND hWndParent);
+	IDialogManager(WORD wDialogId);
 	virtual ~IDialogManager();	
 };
 

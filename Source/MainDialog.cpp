@@ -94,10 +94,10 @@ VOID CMainDialog::OnClose(HWND hWnd) {
 
 // --- public: --- --- --- ---
 
-CMainDialog::CMainDialog(WORD wIntDlgId, HWND hWndParent)
-	: IDialogManager(wIntDlgId, hWndParent) {}
+CMainDialog::CMainDialog(WORD wDialogId, HWND hWndParent)
+	: IDialogManager(wDialogId, hWndParent) {}
 
-CMainDialog::CMainDialog(WORD wIntDlgId)
-	: IDialogManager(wIntDlgId) {}
+CMainDialog::CMainDialog(WORD wDialogId)
+	: IDialogManager(wDialogId) {}
 
 CMainDialog::~CMainDialog() {}

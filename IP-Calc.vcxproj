@@ -103,6 +103,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\AboutDialog.cpp" />
+    <ClCompile Include="Source\ControlsManager.cpp" />
     <ClCompile Include="source\DialogManager.cpp" />
     <ClCompile Include="source\IPv4.cpp" />
     <ClCompile Include="source\MainDialog.cpp" />
@@ -112,11 +113,13 @@
   <ItemGroup>
     <ClInclude Include="resources\Resource.h" />
     <ClInclude Include="Source\AboutDialog.h" />
+    <ClInclude Include="Source\ControlsManager.h" />
     <ClInclude Include="source\DialogManager.h" />
+    <ClInclude Include="Source\HeadersCpp.h" />
     <ClInclude Include="source\IPv4.h" />
     <ClInclude Include="source\MainDialog.h" />
     <ClInclude Include="source\Subnet.h" />
-    <ClInclude Include="source\WinMain.h" />
+    <ClInclude Include="source\HeadersWin.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources\Resource.rc" />

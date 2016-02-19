@@ -1,8 +1,7 @@
 #pragma once
+
 #include "DialogManager.h"
 #include "Subnet.h"
-#include "AboutDialog.h"
-#include <vector>
 
 class CMainDialog : public IDialogManager {
 private:
@@ -34,7 +33,7 @@ private:
 
 public:	
 
-	CMainDialog(WORD wIntDlgId, HWND hWndParent);
-	CMainDialog(WORD wIntDlgId);
+	CMainDialog(WORD wDialogId, HWND hWndParent);
+	CMainDialog(WORD wDialogId);
 	~CMainDialog();
 };

@@ -3,7 +3,7 @@
 
 // --- protected:  --- --- ---
 
-HWND IDialogManager::GetHWndThis() {
+HWND IDialogManager::GetHWndThis() const {
 	return hWndThis_;
 }
 
@@ -43,17 +43,17 @@ VOID IDialogManager::Run() const {
 	DialogBox(hInstance_, lpTemplateName_, hWndParent_, lpDialogProc_);
 }
 
-IDialogManager::IDialogManager(WORD wIntDlgId, HWND hWndParent) {
+IDialogManager::IDialogManager(WORD wDialogId, HWND hWndParent) {
 	hInstance_      = GetModuleHandle(NULL);
-	lpTemplateName_ = MAKEINTRESOURCE(wIntDlgId);
+	lpTemplateName_ = MAKEINTRESOURCE(wDialogId);
 	hWndParent_     = hWndParent;
 	lpDialogProc_   = lpStaticDlgProc;
 
 	dlgList.emplace(this, nullptr);
 }
 
-IDialogManager::IDialogManager(WORD wIntDlgId)
-	: IDialogManager(wIntDlgId, nullptr) {
+IDialogManager::IDialogManager(WORD wDialogId)
+	: IDialogManager(wDialogId, nullptr) {
 }
 
 IDialogManager::~IDialogManager() {
