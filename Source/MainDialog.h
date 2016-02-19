@@ -1,10 +1,10 @@
 #pragma once
-#include "Dlg.h"
+#include "DialogManager.h"
 #include "Subnet.h"
 #include "AboutDialog.h"
 #include <vector>
 
-class CMainDialog : public IDlg {
+class CMainDialog : public IDialogManager {
 private:
 
 	CSubnet netInfo_;

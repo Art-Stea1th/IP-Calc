@@ -8,7 +8,7 @@
 
 #include <map>
 
-class IDlg {
+class IDialogManager {
 private:	
 
 	HINSTANCE hInstance_ = nullptr;
@@ -20,7 +20,7 @@ private:
 
 private:
 
-	explicit IDlg();
+	explicit IDialogManager();
 
 protected:
 
@@ -36,9 +36,9 @@ public:
 
 	VOID Run() const;
 	
-	IDlg(WORD wIntDlgId, HWND hWndParent);
-	IDlg(WORD wIntDlgId);
-	virtual ~IDlg();	
+	IDialogManager(WORD wIntDlgId, HWND hWndParent);
+	IDialogManager(WORD wIntDlgId);
+	virtual ~IDialogManager();	
 };
 
-static std::map<IDlg*, HWND> dlgList;
+static std::map<IDialogManager*, HWND> dlgList;

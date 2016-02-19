@@ -1,7 +1,7 @@
 #pragma once
-#include "Dlg.h"
+#include "DialogManager.h"
 
-class CAboutDialog : public IDlg {
+class CAboutDialog : public IDialogManager {
 private:
 
 	virtual BOOL OnInitDialog(HWND hWnd, HWND hwndFocus, LPARAM lParam) final;

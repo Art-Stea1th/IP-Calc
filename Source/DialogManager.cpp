@@ -1,13 +1,13 @@
-#include "Dlg.h"
+#include "DialogManager.h"
 
 
 // --- protected:  --- --- ---
 
-HWND IDlg::GetHWndThis() {
+HWND IDialogManager::GetHWndThis() {
 	return hWndThis_;
 }
 
-BOOL IDlg::lpStaticDlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+BOOL IDialogManager::lpStaticDlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
 	auto it = dlgList.begin();
 
@@ -39,11 +39,11 @@ BOOL IDlg::lpStaticDlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
 // --- public: --- --- --- ---
 
-VOID IDlg::Run() const {
+VOID IDialogManager::Run() const {
 	DialogBox(hInstance_, lpTemplateName_, hWndParent_, lpDialogProc_);
 }
 
-IDlg::IDlg(WORD wIntDlgId, HWND hWndParent) {
+IDialogManager::IDialogManager(WORD wIntDlgId, HWND hWndParent) {
 	hInstance_      = GetModuleHandle(NULL);
 	lpTemplateName_ = MAKEINTRESOURCE(wIntDlgId);
 	hWndParent_     = hWndParent;
@@ -52,11 +52,11 @@ IDlg::IDlg(WORD wIntDlgId, HWND hWndParent) {
 	dlgList.emplace(this, nullptr);
 }
 
-IDlg::IDlg(WORD wIntDlgId)
-	: IDlg(wIntDlgId, nullptr) {
+IDialogManager::IDialogManager(WORD wIntDlgId)
+	: IDialogManager(wIntDlgId, nullptr) {
 }
 
-IDlg::~IDlg() {
+IDialogManager::~IDialogManager() {
 	auto it = dlgList.find(this);
 	dlgList.erase(it);
 }

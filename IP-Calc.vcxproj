@@ -103,7 +103,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\AboutDialog.cpp" />
-    <ClCompile Include="source\Dlg.cpp" />
+    <ClCompile Include="source\DialogManager.cpp" />
     <ClCompile Include="source\IPv4.cpp" />
     <ClCompile Include="source\MainDialog.cpp" />
     <ClCompile Include="source\Subnet.cpp" />
@@ -112,7 +112,7 @@
   <ItemGroup>
     <ClInclude Include="resources\Resource.h" />
     <ClInclude Include="Source\AboutDialog.h" />
-    <ClInclude Include="source\Dlg.h" />
+    <ClInclude Include="source\DialogManager.h" />
     <ClInclude Include="source\IPv4.h" />
     <ClInclude Include="source\MainDialog.h" />
     <ClInclude Include="source\Subnet.h" />
