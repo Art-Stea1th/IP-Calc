@@ -3,7 +3,11 @@
 
 // --- protected:  --- --- ---
 
-HWND IDialogManager::GetHWndThis() const {
+const HINSTANCE &IDialogManager::GetThisHandle() const {
+	return hInstance_;
+}
+
+const HWND &IDialogManager::GetThisHWnd() const {
 	return hWndThis_;
 }
 
@@ -43,7 +47,7 @@ VOID IDialogManager::Run() const {
 	DialogBox(hInstance_, lpTemplateName_, hWndParent_, lpDialogProc_);
 }
 
-IDialogManager::IDialogManager(WORD wDialogId, HWND hWndParent) {
+IDialogManager::IDialogManager(const WORD &wDialogId, const HWND &hWndParent) {
 	hInstance_      = GetModuleHandle(NULL);
 	lpTemplateName_ = MAKEINTRESOURCE(wDialogId);
 	hWndParent_     = hWndParent;
@@ -52,7 +56,7 @@ IDialogManager::IDialogManager(WORD wDialogId, HWND hWndParent) {
 	dlgList.emplace(this, nullptr);
 }
 
-IDialogManager::IDialogManager(WORD wDialogId)
+IDialogManager::IDialogManager(const WORD &wDialogId)
 	: IDialogManager(wDialogId, nullptr) {
 }
 

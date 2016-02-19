@@ -4,6 +4,7 @@
 #include "HeadersWin.h"
 #include "..\Resources\Resource.h"
 
+
 class IDialogManager {
 private:	
 
@@ -14,13 +15,12 @@ private:
 
 	HWND      hWndThis_ = nullptr;
 
-private:
+protected: // ban overriding methods
 
-	explicit IDialogManager();
+	virtual const HINSTANCE &GetThisHandle() const final; // return r-value
+	virtual const HWND      &GetThisHWnd()   const final; // return r-value
 
-protected:
-
-	HWND GetHWndThis() const;
+protected: // to override
 
 	virtual BOOL OnInitDialog(HWND hWnd, HWND hwndFocus, LPARAM lParam) = 0;
 	virtual VOID OnCommand(HWND hWnd, INT id, HWND hwndCtl, UINT codeNotify) = 0;
@@ -28,12 +28,14 @@ protected:
 	
 	static BOOL CALLBACK lpStaticDlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-public:
+public:    // open methods
 
 	VOID Run() const;
 	
-	IDialogManager(WORD wDialogId, HWND hWndParent);
-	IDialogManager(WORD wDialogId);
+public:    // c-tor / d-tor
+
+	IDialogManager(const WORD &wDialogId, const HWND &hWndParent);
+	IDialogManager(const WORD &wDialogId);
 	virtual ~IDialogManager();	
 };
 
