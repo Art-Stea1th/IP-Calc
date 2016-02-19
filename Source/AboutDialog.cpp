@@ -4,7 +4,7 @@
 
 BOOL CAboutDialog::OnInitDialog(HWND hWnd, HWND hwndFocus, LPARAM lParam) {
 
-	HICON hIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_IP_CALC));
+	HICON hIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_MAIN));
 	::SendMessage(hWnd, WM_SETICON, ICON_SMALL, (LPARAM)hIcon);
 
 	return FALSE;

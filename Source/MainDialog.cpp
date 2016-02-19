@@ -5,7 +5,7 @@
 
 BOOL CMainDialog::OnInitDialog(HWND hWnd, HWND hwndFocus, LPARAM lParam) {
 
-	HICON hIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_IP_CALC));
+	HICON hIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_MAIN));
 	::SendMessage(hWnd, WM_SETICON, ICON_SMALL, (LPARAM)hIcon);
 
 	for (int i(0); i < 7; i++)
@@ -47,10 +47,26 @@ VOID CMainDialog::OnChange() {
 
 	::SendMessage(hWndIpAddrControl_[0], IPM_GETADDRESS, (WPARAM)0, (LPARAM)&netInfo_[0]);
 
-	_TCHAR dwBitmaskBuffer[3];
-	::GetWindowText(hWndComboBitmask_, (LPWSTR)dwBitmaskBuffer, 3);
+	_TCHAR tChBitmaskBuffer[3];
+	::GetWindowText(hWndComboBitmask_, (LPWSTR)tChBitmaskBuffer, 3);
+	UINT8 ui8Bitmask(_wtoi(tChBitmaskBuffer));
 
-	netInfo_.SetBitMask(_wtoi(dwBitmaskBuffer));
+	switch (ui8Bitmask) {
+	case 31:
+		ShowWindow(hWndIpAddrControl_[4], SW_SHOWNA);
+		ShowWindow(hWndIpAddrControl_[5], SW_HIDE);
+		break;
+	case 32:
+		ShowWindow(hWndIpAddrControl_[4], SW_HIDE);
+		ShowWindow(hWndIpAddrControl_[5], SW_HIDE);
+		break;
+	default:
+		ShowWindow(hWndIpAddrControl_[4], SW_SHOWNA);
+		ShowWindow(hWndIpAddrControl_[5], SW_SHOWNA);
+		break;
+	}
+
+	netInfo_.SetBitMask(ui8Bitmask);
 	netInfo_.Calculate();
 
 	for (int i(1); i < 7; i++)
