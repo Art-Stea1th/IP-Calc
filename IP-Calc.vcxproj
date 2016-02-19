@@ -107,6 +107,8 @@
     <ClCompile Include="source\DialogManager.cpp" />
     <ClCompile Include="source\IPv4.cpp" />
     <ClCompile Include="source\MainDialog.cpp" />
+    <ClCompile Include="Source\MakeIntResourceStr.cpp" />
+    <ClCompile Include="Source\StaticText.cpp" />
     <ClCompile Include="source\Subnet.cpp" />
     <ClCompile Include="source\WinMain.cpp" />
   </ItemGroup>
@@ -118,6 +120,8 @@
     <ClInclude Include="Source\HeadersCpp.h" />
     <ClInclude Include="source\IPv4.h" />
     <ClInclude Include="source\MainDialog.h" />
+    <ClInclude Include="Source\MakeIntResourceStr.h" />
+    <ClInclude Include="Source\StaticText.h" />
     <ClInclude Include="source\Subnet.h" />
     <ClInclude Include="source\HeadersWin.h" />
   </ItemGroup>
@@ -136,4 +140,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="resources\Resource.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>
