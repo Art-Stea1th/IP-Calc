@@ -14,8 +14,10 @@ private:
 protected: // to override
 
 	virtual VOID SetText(const tstring &tStr);
+	virtual VOID SetText(const UINT &uID);
 	virtual const tstring &GetText() const;
-	virtual VOID Init() = 0;
+
+	virtual VOID Init(const HWND &hWndParent, const WORD &wControlId);
 
 public:    // ban overriding open methods
 
@@ -27,6 +29,6 @@ public:    // ban overriding open methods
 public:    // c-tor / d-tor
 
 	IControlsManager(const HWND &hWndParent, const WORD &wControlId);
-	virtual ~IControlsManager();
-
+	IControlsManager();
+	virtual ~IControlsManager() = 0;
 };

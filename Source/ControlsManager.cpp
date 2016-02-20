@@ -5,6 +5,10 @@ VOID IControlsManager::SetText(const tstring &tStr) {
 	::SetWindowText(hWndThis_, tStr.c_str());
 }
 
+VOID IControlsManager::SetText(const UINT &uID) {
+	SetText(FLoadString(uID));
+}
+
 const tstring &IControlsManager::GetText() const {
 
 	PCTSTR tChBuffer = nullptr;
@@ -13,6 +17,12 @@ const tstring &IControlsManager::GetText() const {
 	return len
 		? tstring(tChBuffer, static_cast<size_t>(len))
 		: tstring();
+}
+
+
+VOID IControlsManager::Init(const HWND &hWndParent, const WORD &wControlId) {
+	hWndParent_ = hWndParent;
+	hWndThis_ = GetDlgItem(hWndParent, wControlId);
 }
 
 const HWND &IControlsManager::GetThisHWnd() const {
@@ -30,6 +40,10 @@ VOID IControlsManager::Hide() {
 IControlsManager::IControlsManager(const HWND &hWndParent, const WORD &wControlId) {
 	hWndParent_ = hWndParent;
 	hWndThis_   = GetDlgItem(hWndParent, wControlId);
+}
+
+IControlsManager::IControlsManager()
+	: IControlsManager(nullptr, NULL) {
 }
 
 

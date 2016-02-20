@@ -2,14 +2,16 @@
 
 #include "Subnet.h"
 #include "DialogManager.h"
-#include "LoadString.h"
+#include "StaticText.h"
+#include "IpAddressControl.h"
 
 class CMainDialog : public IDialogManager {
 private:
 
-	CSubnet netInfo_;
-	std::vector<HWND>
-		hWndIpAddrControl_;
+	CSubnet                        netInfo_;
+	std::vector<CIpAddressControl> ipField_;
+	std::vector<CStaticText>       staticTextField_;
+
 	HWND hWndComboBitmask_;
 
 private:

@@ -4,13 +4,13 @@
 // --- private: --- --- --- ---
 
 VOID CMainDialog::RePaint() {
-	for (auto i(1); i < hWndIpAddrControl_.size(); i++)
-		::SendMessage(hWndIpAddrControl_.at(i), IPM_SETADDRESS, (WPARAM)0, (LPARAM)netInfo_[i].Get());
+	for (auto i(1); i < 7; i++)
+		ipField_.at(i).SetData(netInfo_[i].Get());
 }
 
 VOID CMainDialog::ChangeIp() {
 	
-	::SendMessage(hWndIpAddrControl_.at(0), IPM_GETADDRESS, (WPARAM)0, (LPARAM)&netInfo_[0]);
+	netInfo_[0] = ipField_.at(0).GetData();
 	netInfo_.Calculate();
 	RePaint();
 }
@@ -23,25 +23,25 @@ VOID CMainDialog::ChangeBitmask() {
 
 	switch (ui8Bitmask) {
 	case 31:
-		ShowWindow(hWndIpAddrControl_.at(4), SW_SHOWNA);
-		ShowWindow(hWndIpAddrControl_.at(5), SW_HIDE);
-		break;
+		ipField_.at(4).Show();
+		ipField_.at(5).Hide(); break;
+
 	case 32:
-		ShowWindow(hWndIpAddrControl_.at(4), SW_HIDE);
-		ShowWindow(hWndIpAddrControl_.at(5), SW_HIDE);
-		break;
+		ipField_.at(4).Hide();
+		ipField_.at(5).Hide(); break;
+
 	default:
-		ShowWindow(hWndIpAddrControl_.at(4), SW_SHOWNA);
-		ShowWindow(hWndIpAddrControl_.at(5), SW_SHOWNA);
-		break;
+		ipField_.at(4).Show();
+		ipField_.at(5).Show(); break;
 	}
+
 	netInfo_.SetBitMask(ui8Bitmask);
 	netInfo_.Calculate();
 	RePaint();
 }
 
 VOID CMainDialog::SetIp(const UINT8 &oct1, const UINT8 &oct2, const UINT8 &oct3, const UINT8 &oct4) {
-	::SendMessage(hWndIpAddrControl_.at(0), IPM_SETADDRESS, (WPARAM)0, MAKEIPADDRESS(oct1, oct2, oct3, oct4));
+	ipField_.at(0).SetData(oct1, oct2, oct3, oct4);
 	ChangeIp();
 }
 
@@ -52,10 +52,14 @@ VOID CMainDialog::SetBitmask(const UINT8 &bitmask) {
 
 VOID CMainDialog::InitControls(const HWND &hWnd) {
 
-	hWndIpAddrControl_.resize(7);
+	// Init CIpAddress Controls
 
-	for (auto i(0); i < hWndIpAddrControl_.size(); ++i)
-		hWndIpAddrControl_.at(i) = GetDlgItem(hWnd, i + IDC_IP_ADDRESS);
+	ipField_.resize(7);
+
+	for (int i(0); i < 7; ++i)
+		ipField_.at(i).Init(hWnd, IDC_IP_ADDRESS + i, 0, 0, 0, 0);
+
+	// Init Bitmask Control
 
 	hWndComboBitmask_ = GetDlgItem(hWnd, IDC_COMBO_BITMASK);
 
@@ -65,8 +69,11 @@ VOID CMainDialog::InitControls(const HWND &hWnd) {
 		::SendMessage(hWndComboBitmask_, (UINT)CB_ADDSTRING, (WPARAM)0, (LPARAM)tchTmp);
 	}
 
-	SetIp(192, 168, 1, 2); SetBitmask(24);
+	// Set CIpAddress Control at(0) and Bitmask Control to default value
+
+	ipField_.at(0).SetData(192, 168, 1, 2); SetBitmask(24);
 }
+
 
 // --- private: --- --- --- ---
 
@@ -83,9 +90,12 @@ BOOL CMainDialog::OnInitDialog(HWND hWnd, HWND hwndFocus, LPARAM lParam) {
 
 VOID CMainDialog::OnCommand(HWND hWnd, INT id, HWND hwndCtl, UINT codeNotify) {
 	switch (LOWORD(id)) {
-	case IDC_IP_ADDRESS:    ChangeIp();                       break;
-	case IDC_COMBO_BITMASK: ChangeBitmask();                  break;
-	case IDC_BUTTON_RESET:  SetIp(0, 0, 0, 0); SetBitmask(0); break;
+	case IDC_IP_ADDRESS:    ChangeIp();      break;
+	case IDC_COMBO_BITMASK: ChangeBitmask(); break;
+	case IDC_BUTTON_RESET:
+		ipField_.at(0).SetData(0, 0, 0, 0);
+		SetBitmask(0);
+		break;
 	}
 }
 
