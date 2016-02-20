@@ -1,16 +1,16 @@
 #include "StaticText.h"
 
 
+VOID CStaticText::SetText(const tstring & tStr) {
+	IControlsManager::SetText(tStr);
+}
+
+const tstring &CStaticText::GetText() const {
+	return IControlsManager::GetText();
+}
+
 VOID CStaticText::Init() {
 	return VOID();
-}
-
-VOID CStaticText::SetData(const PCTSTR &tChLabelText) {
-	::SetWindowText(GetThisHWnd(), tChLabelText);
-}
-
-const PCTSTR &CStaticText::GetData() const {
-	return TEXT(" ");
 }
 
 CStaticText::CStaticText(const HWND &hWndParent, const WORD &wControlId)

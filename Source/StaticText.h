@@ -3,13 +3,10 @@
 #include "ControlsManager.h"
 
 class CStaticText : public IControlsManager {
-public:    // personal
-
-	virtual VOID SetData(const PCTSTR &tChLabelText) final;
-	virtual const PCTSTR &GetData() const final;
-
 public:    // override
 
+	virtual VOID SetText(const tstring &tStr) override final;
+	virtual const tstring &GetText() const override final;
 	virtual VOID Init() override final;
 
 public:    // c-tor / d-tor

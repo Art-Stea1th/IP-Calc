@@ -13,9 +13,9 @@ private:
 
 protected: // to override
 
+	virtual VOID SetText(const tstring &tStr);
+	virtual const tstring &GetText() const;
 	virtual VOID Init() = 0;
-	virtual VOID SetText(const PCTSTR tChStr);
-	virtual const PCTSTR GetText() const;
 
 public:    // ban overriding open methods
 

@@ -1,12 +1,18 @@
 #include "ControlsManager.h"
 
 
-VOID IControlsManager::SetText(const PCTSTR tChStr) {
-	return VOID();
+VOID IControlsManager::SetText(const tstring &tStr) {
+	::SetWindowText(hWndThis_, tStr.c_str());
 }
 
-const PCTSTR IControlsManager::GetText() const {
-	return PCTSTR();
+const tstring &IControlsManager::GetText() const {
+
+	PCTSTR tChBuffer = nullptr;
+	INT len = ::GetWindowText(hWndThis_, reinterpret_cast<PTSTR>(&tChBuffer), 0);
+
+	return len
+		? tstring(tChBuffer, static_cast<size_t>(len))
+		: tstring();
 }
 
 const HWND &IControlsManager::GetThisHWnd() const {
