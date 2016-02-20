@@ -6,10 +6,10 @@
 
 
 class IDialogManager {
-private:	
+private:
 
 	HINSTANCE hInstance_ = nullptr;
-	LPCTSTR   lpTemplateName_ = nullptr;	
+	PCWSTR    lpTemplateName_ = nullptr;
 	HWND      hWndParent_ = nullptr;
 	DLGPROC   lpDialogProc_ = nullptr;
 
@@ -25,18 +25,18 @@ protected: // to override
 	virtual BOOL OnInitDialog(HWND hWnd, HWND hwndFocus, LPARAM lParam) = 0;
 	virtual VOID OnCommand(HWND hWnd, INT id, HWND hwndCtl, UINT codeNotify) = 0;
 	virtual VOID OnClose(HWND hWnd) = 0;
-	
+
 	static INT_PTR CALLBACK lpStaticDlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 public:    // open methods
 
 	VOID Run() const;
-	
+
 public:    // c-tor / d-tor
 
 	IDialogManager(const WORD &wDialogId, const HWND &hWndParent);
 	IDialogManager(const WORD &wDialogId);
-	virtual ~IDialogManager();	
+	virtual ~IDialogManager();
 };
 
 static std::map<IDialogManager*, HWND> dlgList;

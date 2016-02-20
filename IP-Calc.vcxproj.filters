@@ -39,17 +39,14 @@
     <ClCompile Include="Source\StaticText.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\LoadString.cpp">
+    <ClCompile Include="Source\IpAddressControl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\IpAddressControl.cpp">
+    <ClCompile Include="Source\LoadString.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="resources\Resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\MainDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -77,10 +74,13 @@
     <ClInclude Include="Source\StaticText.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\LoadString.h">
+    <ClInclude Include="Source\IpAddressControl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\IpAddressControl.h">
+    <ClInclude Include="resources\Resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LoadString.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

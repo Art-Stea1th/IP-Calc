@@ -5,6 +5,7 @@ typedef uint_fast8_t ui_8;
 typedef uint_fast32_t ui32;
 typedef uint_fast64_t ui64;
 
+
 class CIPv4 {
 private:
 
@@ -55,5 +56,3 @@ public:
 		const ui64 &oct3
 		);
 };
-
-std::wostream &operator << (std::wostream &wos, const CIPv4 &obj);

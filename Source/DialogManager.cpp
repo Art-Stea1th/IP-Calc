@@ -48,10 +48,10 @@ VOID IDialogManager::Run() const {
 }
 
 IDialogManager::IDialogManager(const WORD &wDialogId, const HWND &hWndParent) {
-	hInstance_      = GetModuleHandle(NULL);
+	hInstance_ = GetModuleHandle(NULL);
 	lpTemplateName_ = MAKEINTRESOURCE(wDialogId);
-	hWndParent_     = hWndParent;
-	lpDialogProc_   = lpStaticDlgProc;
+	hWndParent_ = hWndParent;
+	lpDialogProc_ = lpStaticDlgProc;
 
 	dlgList.emplace(this, nullptr);
 }

@@ -9,13 +9,13 @@ class IControlsManager {
 private:
 
 	HWND hWndParent_ = nullptr;
-	HWND hWndThis_   = nullptr;
+	HWND hWndThis_ = nullptr;
 
 protected: // to override
 
-	virtual VOID SetText(const tstring &tStr);
+	virtual VOID SetText(const std::wstring &tStr);
 	virtual VOID SetText(const UINT &uID);
-	virtual const tstring &GetText() const;
+	virtual std::wstring GetText() const;
 
 	virtual VOID Init(const HWND &hWndParent, const WORD &wControlId);
 

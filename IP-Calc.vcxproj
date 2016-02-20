@@ -119,9 +119,9 @@
     <ClCompile Include="Source\AboutDialog.cpp" />
     <ClCompile Include="Source\ControlsManager.cpp" />
     <ClCompile Include="source\DialogManager.cpp" />
+    <ClCompile Include="Source\LoadString.cpp" />
     <ClCompile Include="Source\IpAddressControl.cpp" />
     <ClCompile Include="source\IPv4.cpp" />
-    <ClCompile Include="Source\LoadString.cpp" />
     <ClCompile Include="source\MainDialog.cpp" />
     <ClCompile Include="Source\StaticText.cpp" />
     <ClCompile Include="source\Subnet.cpp" />
@@ -132,10 +132,10 @@
     <ClInclude Include="Source\AboutDialog.h" />
     <ClInclude Include="Source\ControlsManager.h" />
     <ClInclude Include="source\DialogManager.h" />
+    <ClInclude Include="Source\LoadString.h" />
     <ClInclude Include="Source\HeadersCpp.h" />
     <ClInclude Include="Source\IpAddressControl.h" />
     <ClInclude Include="source\IPv4.h" />
-    <ClInclude Include="Source\LoadString.h" />
     <ClInclude Include="source\MainDialog.h" />
     <ClInclude Include="Source\StaticText.h" />
     <ClInclude Include="source\Subnet.h" />

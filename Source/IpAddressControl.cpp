@@ -21,7 +21,7 @@ VOID CIpAddressControl::SetData(
 		);
 }
 
-const UINT &CIpAddressControl::GetData() const {
+UINT CIpAddressControl::GetData() const {
 	UINT uResult;
 	::SendMessage(GetThisHWnd(), IPM_GETADDRESS, static_cast<WPARAM>(0), reinterpret_cast<WPARAM>(&uResult));
 	return uResult;

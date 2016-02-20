@@ -1,7 +1,7 @@
 #include "ControlsManager.h"
 
 
-VOID IControlsManager::SetText(const tstring &tStr) {
+VOID IControlsManager::SetText(const std::wstring &tStr) {
 	::SetWindowText(hWndThis_, tStr.c_str());
 }
 
@@ -9,14 +9,14 @@ VOID IControlsManager::SetText(const UINT &uID) {
 	SetText(FLoadString(uID));
 }
 
-const tstring &IControlsManager::GetText() const {
+std::wstring IControlsManager::GetText() const {
 
-	PCTSTR tChBuffer = nullptr;
-	INT len = ::GetWindowText(hWndThis_, reinterpret_cast<PTSTR>(&tChBuffer), 0);
+	PCWSTR tChBuffer = nullptr;
+	INT iBufferSize = ::GetWindowText(hWndThis_, reinterpret_cast<PWSTR>(&tChBuffer), 0);
 
-	return len
-		? tstring(tChBuffer, static_cast<size_t>(len))
-		: tstring();
+	return iBufferSize
+		? std::wstring(tChBuffer, static_cast<size_t>(iBufferSize))
+		: std::wstring();
 }
 
 
@@ -38,13 +38,11 @@ VOID IControlsManager::Hide() {
 }
 
 IControlsManager::IControlsManager(const HWND &hWndParent, const WORD &wControlId) {
-	hWndParent_ = hWndParent;
-	hWndThis_   = GetDlgItem(hWndParent, wControlId);
+	Init(hWndParent, wControlId);
 }
 
 IControlsManager::IControlsManager()
 	: IControlsManager(nullptr, NULL) {
 }
-
 
 IControlsManager::~IControlsManager() {}

@@ -15,7 +15,7 @@ public:
 		const UINT &uOct4
 		) final;
 
-	virtual const UINT &GetData() const final;
+	virtual UINT GetData() const final;
 
 	virtual VOID Init(const HWND &hWndParent, const WORD &wControlId) override final;
 	virtual VOID Init(const HWND &hWndParent, const WORD &wControlId, const UINT &uIp) final;

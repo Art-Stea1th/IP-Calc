@@ -1,7 +1,7 @@
 #include "StaticText.h"
 
 
-VOID CStaticText::SetData(const tstring &tStr) {
+VOID CStaticText::SetData(const std::wstring &tStr) {
 	IControlsManager::SetText(tStr);
 }
 
@@ -9,7 +9,7 @@ VOID CStaticText::SetData(const UINT &uID) {
 	IControlsManager::SetText(uID);
 }
 
-const tstring &CStaticText::GetData() const {
+std::wstring CStaticText::GetData() const {
 	return IControlsManager::GetText();
 }
 
@@ -19,7 +19,7 @@ VOID CStaticText::Init(const HWND &hWndParent, const WORD &wControlId) {
 	IControlsManager::SetText(TEXT("Static Text"));
 }
 
-VOID CStaticText::Init(const HWND &hWndParent, const WORD &wControlId, const tstring &tStr) {
+VOID CStaticText::Init(const HWND &hWndParent, const WORD &wControlId, const std::wstring &tStr) {
 	IControlsManager::Init(hWndParent, wControlId);
 	IControlsManager::SetText(tStr);
 }
