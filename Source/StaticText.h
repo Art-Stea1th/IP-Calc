@@ -5,8 +5,8 @@
 class CStaticText : public IControlsManager {
 public:    // personal
 
-	virtual VOID SetData(const _TCHAR* &tChLabelText) final;
-	//virtual const _TCHAR* &GetData() const final;
+	virtual VOID SetData(const PCTSTR &tChLabelText) final;
+	virtual const PCTSTR &GetData() const final;
 
 public:    // override
 

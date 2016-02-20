@@ -1,6 +1,14 @@
 #include "ControlsManager.h"
 
 
+VOID IControlsManager::SetText(const PCTSTR tChStr) {
+	return VOID();
+}
+
+const PCTSTR IControlsManager::GetText() const {
+	return PCTSTR();
+}
+
 const HWND &IControlsManager::GetThisHWnd() const {
 	return hWndThis_;
 }

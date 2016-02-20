@@ -11,7 +11,7 @@ const HWND &IDialogManager::GetThisHWnd() const {
 	return hWndThis_;
 }
 
-BOOL IDialogManager::lpStaticDlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+INT_PTR IDialogManager::lpStaticDlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
 	auto it = dlgList.begin();
 

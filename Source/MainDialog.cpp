@@ -5,7 +5,7 @@
 
 VOID CMainDialog::RePaint() {
 	for (auto i(1); i < hWndIpAddrControl_.size(); i++)
-		::SendMessage(hWndIpAddrControl_.at(i), IPM_SETADDRESS, (WPARAM)0, netInfo_[i].Get());
+		::SendMessage(hWndIpAddrControl_.at(i), IPM_SETADDRESS, (WPARAM)0, (LPARAM)netInfo_[i].Get());
 }
 
 VOID CMainDialog::ChangeIp() {
@@ -17,9 +17,9 @@ VOID CMainDialog::ChangeIp() {
 
 VOID CMainDialog::ChangeBitmask() {
 
-	_TCHAR tChBitmaskBuffer[3];
-	::GetWindowText(hWndComboBitmask_, (LPWSTR)tChBitmaskBuffer, 3);
-	UINT8 ui8Bitmask(_wtoi(tChBitmaskBuffer));
+	TCHAR tChBitmaskBuffer[3];
+	::GetWindowText(hWndComboBitmask_, (LPTSTR)tChBitmaskBuffer, 3);
+	UINT8 ui8Bitmask(_ttoi(tChBitmaskBuffer));
 
 	switch (ui8Bitmask) {
 	case 31:
@@ -60,8 +60,8 @@ VOID CMainDialog::InitControls(const HWND &hWnd) {
 	hWndComboBitmask_ = GetDlgItem(hWnd, IDC_COMBO_BITMASK);
 
 	for (auto i(0); i < 33; i++) {
-		_TCHAR tchTmp[3];
-		_itow(i, tchTmp, 10);
+		TCHAR tchTmp[3];
+		_itot(i, tchTmp, 10);
 		::SendMessage(hWndComboBitmask_, (UINT)CB_ADDSTRING, (WPARAM)0, (LPARAM)tchTmp);
 	}
 
@@ -75,8 +75,7 @@ BOOL CMainDialog::OnInitDialog(HWND hWnd, HWND hwndFocus, LPARAM lParam) {
 	HICON hIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_MAIN));
 	::SendMessage(hWnd, WM_SETICON, ICON_SMALL, (LPARAM)hIcon);
 	
-	::SetWindowText(hWnd, FMakeIntResourceStr(GetThisHandle(), IDS_MAIN_DIALOD_CAPTION, 64));
-
+	::SetWindowText(hWnd, FLoadString(IDS_MAIN_DIALOD_CAPTION));
 	InitControls(hWnd);
 
 	return FALSE;

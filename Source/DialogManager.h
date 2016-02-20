@@ -26,7 +26,7 @@ protected: // to override
 	virtual VOID OnCommand(HWND hWnd, INT id, HWND hwndCtl, UINT codeNotify) = 0;
 	virtual VOID OnClose(HWND hWnd) = 0;
 	
-	static BOOL CALLBACK lpStaticDlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	static INT_PTR CALLBACK lpStaticDlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 public:    // open methods
 

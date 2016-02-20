@@ -5,13 +5,13 @@ VOID CStaticText::Init() {
 	return VOID();
 }
 
-VOID CStaticText::SetData(const _TCHAR* &tChLabelText) {
+VOID CStaticText::SetData(const PCTSTR &tChLabelText) {
 	::SetWindowText(GetThisHWnd(), tChLabelText);
 }
 
-//const _TCHAR* &CStaticText::GetData() const {
-//	// TODO: insert return statement here
-//}
+const PCTSTR &CStaticText::GetData() const {
+	return TEXT(" ");
+}
 
 CStaticText::CStaticText(const HWND &hWndParent, const WORD &wControlId)
 	: IControlsManager(hWndParent, wControlId) {
