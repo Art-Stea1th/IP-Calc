@@ -1,7 +1,6 @@
 #pragma once
 #include "IPv4.h"
 
-
 class CSubnet {
 
 	CIPv4 address_;
@@ -41,6 +40,5 @@ public:
 
 //   operators -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
 
-	CIPv4 & operator [] (const ui64 &ndx);
-	
+	CIPv4 & operator [] (const ui64 &ndx);	
 };

@@ -1,5 +1,6 @@
 #include "Subnet.h"
 
+
 void CSubnet::CalculateWildcard() {
 	wildcard_ = ~netmask_;
 }
@@ -46,12 +47,14 @@ void CSubnet::SetBitMask(const ui_8 &bitmask) {
 }
 
 void CSubnet::Calculate() {
+
 	CalculateWildcard(),
 	CalculateNetwork(),
 	CalculateHostMin(),
 	CalculateHostMax(),
 	CalculateBroadcast();
 }
+
 
 //   c-tors \ d-tors   -   -   -   -   -   -   -   -   -   -   -   -   -
 
@@ -61,6 +64,7 @@ CSubnet::~CSubnet() {}
 //   operators -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
 
 CIPv4 & CSubnet::operator [] (const ui64 &ndx) {
+
 	switch (ndx) {
 	case 0: return address_;
 	case 1: return netmask_;
