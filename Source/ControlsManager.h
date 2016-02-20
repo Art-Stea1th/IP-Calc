@@ -2,7 +2,7 @@
 
 #include "HeadersCpp.h"
 #include "HeadersWin.h"
-//#include "MakeIntResourceStr.h"
+#include "LoadString.h"
 
 
 class IControlsManager {
@@ -14,6 +14,8 @@ private:
 protected: // to override
 
 	virtual VOID Init() = 0;
+	virtual VOID SetText(const PCTSTR tChStr);
+	virtual const PCTSTR GetText() const;
 
 public:    // ban overriding open methods
 

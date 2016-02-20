@@ -2,7 +2,7 @@
 
 #include "Subnet.h"
 #include "DialogManager.h"
-#include "MakeIntResourceStr.h"
+#include "LoadString.h"
 
 class CMainDialog : public IDialogManager {
 private:
