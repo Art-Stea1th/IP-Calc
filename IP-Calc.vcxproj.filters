@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
+    <Filter Include="Class Diagram">
+      <UniqueIdentifier>{d3360b69-ef38-42e9-ade0-208ca9936973}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\MainDialog.cpp">
@@ -93,6 +96,9 @@
     <Image Include="Resources\IP-Calc.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="resources\IP-Calc_LOGO_small.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="Resources\IP-Calc.manifest">
@@ -102,6 +108,9 @@
   <ItemGroup>
     <None Include="README.md">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Diagrams\ClassDiagram.cd">
+      <Filter>Class Diagram</Filter>
     </None>
   </ItemGroup>
 </Project>

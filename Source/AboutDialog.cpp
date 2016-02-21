@@ -11,6 +11,9 @@ BOOL CAboutDialog::OnInitDialog(HWND hWnd, HWND hwndFocus, LPARAM lParam) {
 }
 
 VOID CAboutDialog::OnCommand(HWND hWnd, INT id, HWND hwndCtl, UINT codeNotify) {
+	switch (LOWORD(id)) {
+	case IDOK: OnClose(hWnd);
+	}
 }
 
 VOID CAboutDialog::OnClose(HWND hWnd) {

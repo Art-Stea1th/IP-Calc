@@ -5,6 +5,8 @@
 #include "Static.h"
 #include "IpAddressControl.h"
 
+#include "AboutDialog.h"
+
 class CMainDialog : public IDialog {
 private:
 

@@ -77,7 +77,6 @@ VOID CMainDialog::LoadLocalization(const HWND &hWnd) {
 			IDS_MAIN_DIALOG_STATIC_IP + i);                  //
 
 	btnReset.SetData(IDS_MAIN_DIALOG_BTN_RESET);             // - SetData Reset Button
-
 	
 															 
 	//  -  TEMP  -   -   -   -   -   -   -   -   -   -   -   -   -
@@ -85,12 +84,11 @@ VOID CMainDialog::LoadLocalization(const HWND &hWnd) {
 
 	std::vector<std::wstring> vecStrBuffer;
 
-	for (int i(0); i < 3; ++i)
+	for (int i(0); i < 2; ++i)
 		vecStrBuffer.push_back(FLoadString(IDS_MAIN_DIALOG_MENU_FILE + i * 100));
 
 	HMENU hMenuMain = GetMenu(hWnd);
-
-	for (int i(0); i < 3; i++) {
+	for (int i(0); i < 2; i++) {
 		MENUITEMINFOW mii = {};
 		mii.cbSize = sizeof(mii);
 		mii.dwTypeData = const_cast<PWSTR>(vecStrBuffer.at(i).c_str());
@@ -100,8 +98,25 @@ VOID CMainDialog::LoadLocalization(const HWND &hWnd) {
 
 	//  -  TEMP  -   -   -   -   -   -   -   -   -   -   -   -   -
 
-}
+	HMENU hMenuFileExit = GetSubMenu(hMenuMain, 0);
+	MENUITEMINFOW miExit = {};
+	miExit.cbSize = sizeof(miExit);
+	miExit.dwTypeData = L"Exit";
+	miExit.fMask = MIIM_STRING;
+	SetMenuItemInfoW(hMenuFileExit, 0, true, &miExit);
 
+	//  -  TEMP  -   -   -   -   -   -   -   -   -   -   -   -   -
+
+	HMENU hMenuHelpAbout = GetSubMenu(hMenuMain, 1);
+	MENUITEMINFOW miAbout = {};
+	miAbout.cbSize = sizeof(miAbout);
+	miAbout.dwTypeData = L"About";
+	miAbout.fMask = MIIM_STRING;
+	SetMenuItemInfoW(hMenuHelpAbout, 0, true, &miAbout);
+
+	//  -  TEMP  -   -   -   -   -   -   -   -   -   -   -   -   -
+
+}
 
 // --- private: --- --- --- ---
 
@@ -125,6 +140,12 @@ VOID CMainDialog::OnCommand(HWND hWnd, INT id, HWND hwndCtl, UINT codeNotify) {
 	case IDC_BUTTON_RESET:
 		ipField_.at(0).SetData(0, 0, 0, 0); ChangeIp();
 		::SendMessage(hWndComboBitmask_, CB_SETCURSEL, (WPARAM)0, (LPARAM)0); ChangeBitmask();
+		break;
+
+	case IDM_FILE_EXIT: OnClose(hWnd); break;
+	case IDM_HELP_ABOUT:
+		CAboutDialog aboutDlg(IDD_ABOUT, GetThisHWnd());
+		aboutDlg.Run();
 		break;
 	}
 }

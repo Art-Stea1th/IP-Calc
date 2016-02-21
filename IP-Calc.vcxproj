@@ -146,11 +146,13 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\IP-Calc.ico" />
+    <Image Include="resources\IP-Calc_LOGO_small.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="Resources\IP-Calc.manifest" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Diagrams\ClassDiagram.cd" />
     <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
