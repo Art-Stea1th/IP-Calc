@@ -77,6 +77,29 @@ VOID CMainDialog::LoadLocalization(const HWND &hWnd) {
 			IDS_MAIN_DIALOG_STATIC_IP + i);                  //
 
 	btnReset.SetData(IDS_MAIN_DIALOG_BTN_RESET);             // - SetData Reset Button
+
+	
+															 
+	//  -  TEMP  -   -   -   -   -   -   -   -   -   -   -   -   -
+	//  -  It will be implemented as a recursive dynamic of constructing a hierarchy structure of menu items.
+
+	std::vector<std::wstring> vecStrBuffer;
+
+	for (int i(0); i < 3; ++i)
+		vecStrBuffer.push_back(FLoadString(IDS_MAIN_DIALOG_MENU_FILE + i * 100));
+
+	HMENU hMenuMain = GetMenu(hWnd);
+
+	for (int i(0); i < 3; i++) {
+		MENUITEMINFOW mii = {};
+		mii.cbSize = sizeof(mii);
+		mii.dwTypeData = const_cast<PWSTR>(vecStrBuffer.at(i).c_str());
+		mii.fMask = MIIM_STRING;
+		SetMenuItemInfoW(hMenuMain, i, true, &mii);
+	}
+
+	//  -  TEMP  -   -   -   -   -   -   -   -   -   -   -   -   -
+
 }
 
 
