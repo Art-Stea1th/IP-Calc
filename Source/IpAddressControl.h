@@ -1,9 +1,9 @@
 #pragma once
 
-#include "ControlsManager.h"
+#include "Control.h"
 
 
-class CIpAddressControl : public IControlsManager {
+class CIpAddressControl : public IControl {
 public:
 
 	virtual VOID SetData(const UINT &uIp) final;

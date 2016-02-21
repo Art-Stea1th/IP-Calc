@@ -30,19 +30,19 @@
     <ClCompile Include="Source\AboutDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\DialogManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ControlsManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\StaticText.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\IpAddressControl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\LoadString.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Control.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Static.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,19 +59,10 @@
     <ClInclude Include="Source\AboutDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\DialogManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ControlsManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\HeadersWin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\HeadersCpp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\StaticText.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\IpAddressControl.h">
@@ -81,6 +72,15 @@
       <Filter>Resource Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\LoadString.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Control.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Dialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Static.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -29,11 +29,12 @@ UINT CIpAddressControl::GetData() const {
 
 
 VOID CIpAddressControl::Init(const HWND &hWndParent, const WORD &wControlId) {
-	IControlsManager::Init(hWndParent, wControlId);
+	IControl::Init(hWndParent, wControlId);
+	CIpAddressControl::SetData(0);
 }
 
 VOID CIpAddressControl::Init(const HWND &hWndParent, const WORD &wControlId, const UINT &uIp) {
-	IControlsManager::Init(hWndParent, wControlId);
+	IControl::Init(hWndParent, wControlId);
 	CIpAddressControl::SetData(uIp);
 }
 
@@ -45,16 +46,16 @@ VOID CIpAddressControl::Init(
 	const UINT &uOct3,
 	const UINT &uOct4
 	) {
-	IControlsManager::Init(hWndParent, wControlId);
+	IControl::Init(hWndParent, wControlId);
 	CIpAddressControl::SetData(uOct1, uOct2, uOct3, uOct4);
 }
 
 CIpAddressControl::CIpAddressControl(const HWND &hWndParent, const WORD &wControlId)
-	: IControlsManager(hWndParent, wControlId) {
+	: IControl(hWndParent, wControlId) {
 }
 
 CIpAddressControl::CIpAddressControl()
-	: IControlsManager() {
+	: IControl() {
 }
 
 CIpAddressControl::~CIpAddressControl() {}

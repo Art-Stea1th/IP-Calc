@@ -1,9 +1,9 @@
 #pragma once
 
-#include "ControlsManager.h"
+#include "Control.h"
 
 
-class CStaticText : public IControlsManager {
+class CStatic : public IControl {
 public:
 
 	virtual VOID SetData(const std::wstring &tStr) final;
@@ -16,7 +16,7 @@ public:
 
 public:    // c-tor / d-tor
 
-	CStaticText(const HWND &hWndParent, const WORD &wControlId);
-	CStaticText();
-	~CStaticText();
+	CStatic(const HWND &hWndParent, const WORD &wControlId);
+	CStatic();
+	~CStatic();
 };

@@ -5,7 +5,7 @@
 #include "LoadString.h"
 
 
-class IControlsManager {
+class IControl {
 private:
 
 	HWND hWndParent_ = nullptr;
@@ -28,7 +28,7 @@ public:    // ban overriding open methods
 
 public:    // c-tor / d-tor
 
-	IControlsManager(const HWND &hWndParent, const WORD &wControlId);
-	IControlsManager();
-	virtual ~IControlsManager() = 0;
+	IControl(const HWND &hWndParent, const WORD &wControlId);
+	IControl();
+	virtual ~IControl() = 0;
 };

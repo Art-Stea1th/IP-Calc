@@ -117,27 +117,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\AboutDialog.cpp" />
-    <ClCompile Include="Source\ControlsManager.cpp" />
-    <ClCompile Include="source\DialogManager.cpp" />
+    <ClCompile Include="Source\Control.cpp" />
+    <ClCompile Include="source\Dialog.cpp" />
     <ClCompile Include="Source\LoadString.cpp" />
     <ClCompile Include="Source\IpAddressControl.cpp" />
     <ClCompile Include="source\IPv4.cpp" />
     <ClCompile Include="source\MainDialog.cpp" />
-    <ClCompile Include="Source\StaticText.cpp" />
+    <ClCompile Include="Source\Static.cpp" />
     <ClCompile Include="source\Subnet.cpp" />
     <ClCompile Include="source\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resources\Resource.h" />
     <ClInclude Include="Source\AboutDialog.h" />
-    <ClInclude Include="Source\ControlsManager.h" />
-    <ClInclude Include="source\DialogManager.h" />
+    <ClInclude Include="Source\Control.h" />
+    <ClInclude Include="source\Dialog.h" />
     <ClInclude Include="Source\LoadString.h" />
     <ClInclude Include="Source\HeadersCpp.h" />
     <ClInclude Include="Source\IpAddressControl.h" />
     <ClInclude Include="source\IPv4.h" />
     <ClInclude Include="source\MainDialog.h" />
-    <ClInclude Include="Source\StaticText.h" />
+    <ClInclude Include="Source\Static.h" />
     <ClInclude Include="source\Subnet.h" />
     <ClInclude Include="source\HeadersWin.h" />
   </ItemGroup>
