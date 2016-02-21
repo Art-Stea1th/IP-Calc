@@ -5,7 +5,7 @@
 #include "..\Resources\Resource.h"
 
 
-class IDialogManager {
+class IDialog {
 private:
 
 	HINSTANCE hInstance_ = nullptr;
@@ -34,9 +34,9 @@ public:    // open methods
 
 public:    // c-tor / d-tor
 
-	IDialogManager(const WORD &wDialogId, const HWND &hWndParent);
-	IDialogManager(const WORD &wDialogId);
-	virtual ~IDialogManager();
+	IDialog(const WORD &wDialogId, const HWND &hWndParent);
+	IDialog(const WORD &wDialogId);
+	virtual ~IDialog();
 };
 
-static std::map<IDialogManager*, HWND> dlgList;
+static std::map<IDialog*, HWND> dlgList;

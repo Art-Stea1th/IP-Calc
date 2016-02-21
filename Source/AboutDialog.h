@@ -1,7 +1,7 @@
 #pragma once
-#include "DialogManager.h"
+#include "Dialog.h"
 
-class CAboutDialog : public IDialogManager {
+class CAboutDialog : public IDialog {
 private: // override
 
 	virtual BOOL OnInitDialog(HWND hWnd, HWND hwndFocus, LPARAM lParam)      override final;
