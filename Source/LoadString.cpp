@@ -18,7 +18,9 @@ FLoadString::FLoadString(const UINT &uID) {
 		wStrBuf_.resize(static_cast<size_t>(iBufSz));
 
 		while (iBufSz--)
-			wStrBuf_.at(iBufSz) = pcwStrBuf[iBufSz];
+			wStrBuf_.at(iBufSz)
+			= pcwStrBuf[iBufSz];
+		//memcpy(wStrBuf_._Myptr(), reinterpret_cast<LPCVOID>(&(*pcwStrBuf)), iBufSz * 2);		
 	}
 	else wStrBuf_.clear();
 }
