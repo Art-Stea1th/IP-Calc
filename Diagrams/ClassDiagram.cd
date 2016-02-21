@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CIPv4">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAABABIEIAAACABAAAAAAAAQAAgAAAAAAA=</HashCode>
+      <FileName>source\IPv4.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSubnet">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABIBACIAAAAAAJEEDAAAACEgAAAGwIAAIAAAAAA=</HashCode>
+      <FileName>source\Subnet.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FLoadString">
+    <Position X="8.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAQAAAAAEAAAAAAQAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Source\LoadString.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IControl">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAgAAAAAAKkIAAAAAAAIAEAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Source\Control.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CStatic">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABEAAAQAAAQAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Source\Static.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CIpAddressControl">
+    <Position X="10.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAABEAAAAAAAAAAAAAAAAAAACAAAAAACAAAAAAA=</HashCode>
+      <FileName>Source\IpAddressControl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IDialog">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAoAAAAAZCAABAAAAQAIAEAAAAIAIAAAAAAAI=</HashCode>
+      <FileName>source\Dialog.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMainDialog">
+    <Position X="6.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIQAAMAgQAAAAIAAAACAAAQACAAAAAAABIAQAIMAAA=</HashCode>
+      <FileName>source\MainDialog.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CAboutDialog">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEQAAAAAAAAAAAAAAAQAAAAAAAAAAIBAAAAAAA=</HashCode>
+      <FileName>Source\AboutDialog.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Typedef Name="ui_8" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\IPv4.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="ui32" Collapsed="true">
+    <Position X="0.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\IPv4.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="ui64" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\IPv4.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
