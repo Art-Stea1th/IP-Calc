@@ -279,3 +279,9 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+*.opendb
+*.jpg
+*.zip
+*.psd
+*.png
+/_Art/IP-Calc_LOGO.bmp
