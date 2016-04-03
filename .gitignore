@@ -284,4 +284,6 @@ $RECYCLE.BIN/
 *.zip
 *.psd
 *.png
-/_Art/IP-Calc_LOGO.bmp
+/_Art/
+/_ReleaseBackup/
+/_Sketch/
